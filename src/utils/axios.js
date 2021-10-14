@@ -1,4 +1,5 @@
 import axios from "axios";
+import {store} from "../App"
 
 const instance = axios.create({
   baseURL:'https://localhost:5001',
@@ -9,6 +10,21 @@ const instance = axios.create({
   },
  // withCredentials: true,
 });
+
+
+
+instance.interceptors.request.use(
+  config => {
+    const state = store.getState();
+    console.log(state);
+    const accessToken = state.user.token;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  },
+  err => Promise.reject(err)
+);
 
 
 export default instance;

@@ -13,7 +13,6 @@ const userReducer = ( state = INITIAL_STATE, action) => {
       return {
         ...state,
        user: action.payload.user,
-        formSubmitted: false // after update user formsubmition reset
       }   
       default:{
         return state // We return the default state here  

@@ -5,11 +5,14 @@ import { useMutation } from "react-query";
 import { useStyles } from "./login.styles";
 import { login_shema } from "../../validations/user";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { ActionCreators } from "../../redux/user/user.actions"; 
 
  import toast from "../toast";
 
 
 const Login = props => {
+const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues :{
@@ -18,22 +21,21 @@ const Login = props => {
   }, validationSchema: login_shema,
   onSubmit:values => mutation.mutate(values)
     } )
+
   const classes = useStyles();
+
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
   }, []); 
+
   const mutation = useMutation(authenticate, {
     onSuccess: ({ user }) => {
-        const payload = {
-          ...user
-        };
-      console.log("approved", user);
-      console.log(payload)
-      notify("success", "Successfully loged in");
+        dispatch(ActionCreators.login(user));
+      notify("success", "Successfully logged in");
     },
     onError: () => {
         console.log("denyed");
-      notify("error", "Invalid email or password, please try again!");
+      notify("error", "Invalid username or password, please try again!");
     },
   });
 

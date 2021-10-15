@@ -1,42 +1,44 @@
 import { Grid, Paper, Avatar, Button, TextField, Typography } from "@material-ui/core";
 import { useFormik } from "formik";
 import { useMutation } from "react-query";
- import { authenticate } from "../../api/user";
-import { useStyles } from "./login.styles";
-import { login_shema } from "../../validations/user";
+ import { create } from "../../api/user";
+import { useStyles } from "./register.styles";
+import { register_shema } from "../../validations/user";
 import React from "react";
-import { useDispatch } from "react-redux";
-import { ActionCreators } from "../../redux/user/user.actions"; 
-import { Link } from "react-router-dom";
-
+import { useHistory} from "react-router-dom"; 
  import toast from "../toast";
 
 
-const Login = props => {
-const dispatch = useDispatch();
+const Register = () => {
+  
+  const classes = useStyles();
+  const history = useHistory();
 
   const formik = useFormik({
     initialValues :{
     userName: "",
+    email: "",
     password: "",
-  }, validationSchema: login_shema,
+    confirmPassword: "",
+  }, validationSchema: register_shema,
   onSubmit:values => mutation.mutate(values)
-    } )
+    } );
 
-  const classes = useStyles();
+
+
 
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
   }, []); 
 
-  const mutation = useMutation(authenticate, {
+  const mutation = useMutation(create, {
     onSuccess: ({ user }) => {
-        dispatch(ActionCreators.login(user));
-      notify("success", "Successfully logged in");
+      notify("success", "Your registration went successfully");
+      history.push("/login");
     },
     onError: () => {
         console.log("denyed");
-      notify("error", "Invalid username or password, please try again!");
+      notify("error", "Something went wrong");
     },
   });
 
@@ -44,7 +46,7 @@ const dispatch = useDispatch();
     <Paper className={classes.paper} elevation={20}>
       <Grid container direction="column" justifyContent="center" alignItems="center">
         <Avatar className={classes.avatar} />
-        <h2>Sign In</h2>
+        <h2>Sign Up</h2>
       </Grid>
           <form onSubmit={formik.handleSubmit}>
            <Grid container alignItems="center">
@@ -57,6 +59,17 @@ const dispatch = useDispatch();
              placeholder="Enter your username"
              type="text"
            />
+           <Grid item className={classes.container} xs={12}>
+           <TextField
+             value={formik.values.email}
+             onChange={formik.handleChange}
+             fullWidth
+             name="email"
+             placeholder="Enter your email"
+             type="email"
+           /> 
+           {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
+         </Grid>
            
          </Grid>
             <Grid item className={classes.container} xs={12}>
@@ -68,22 +81,25 @@ const dispatch = useDispatch();
                 placeholder="Enter your password"
                 type="password"
               />
+              {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}
               
             </Grid>
+            <Grid item className={classes.container} xs={12}>
+            <TextField
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
+              fullWidth
+              name="confirmPassword"
+              placeholder="Enter your password once more"
+              type="password"
+            /> 
+          </Grid>
             <Grid item className={classes.buttonAllign} xs ={12}>
               <Button className={classes.button} type="submit" variant="contained" color="primary">
-                Sign in
+                Sign up
               </Button>
             </Grid>
             <Grid className={classes.containerLink} container direction="row">
-              <Grid item xs={12}>
-                <Typography variant="body1">
-                  Don't have an account?{" "}
-                  <Link to="/register">
-                    Sign up
-                  </Link>
-                </Typography>
-              </Grid>
             </Grid>
             </Grid>
           </form>
@@ -91,4 +107,4 @@ const dispatch = useDispatch();
   );
 };
 
-export default Login; 
+export default Register; 

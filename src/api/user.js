@@ -5,7 +5,6 @@ export const authenticate = async user => {
     try {
       const {
         data,
-       // headers: { access_token },
       } = await axios.post("/api/Auth/token", user);
       return { user: data };
     } catch (error) {
@@ -16,7 +15,19 @@ export const authenticate = async user => {
 
   export const getCurrentUser = async () => {
     try {
-      const response = await axios.get("/api/Auth/token");
+      const response = await axios.get("/api/Auth/user-info");
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response);
+    }
+  };
+
+  export const create = async data => {
+    try {
+      const clientURIForEmailConfirmation = "http://localhost:4200/emailConfirmation"
+      const { userName, password, email  } = data;
+      const user = { userName, password, email , clientURIForEmailConfirmation };
+      const response = await axios.post("/api/User", user);
       return response.data;
     } catch (error) {
       throw new Error(error);

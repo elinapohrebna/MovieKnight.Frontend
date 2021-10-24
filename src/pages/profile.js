@@ -1,7 +1,9 @@
 import React from "react";
-import {Avatar, Box, Button, Icon, IconButton, LinearProgress, Modal, Typography} from "@material-ui/core";
+import {Avatar, Box, Button, Icon, IconButton, LinearProgress, Modal, TextField, Typography} from "@material-ui/core";
 import {useStyles} from "./profile.styles";
 import {Chart} from "react-google-charts";
+import {useFormik} from "formik";
+import {edit_user_shema, login_shema} from "../validations/user";
 
 const FriendRow = ({name, img}) => {
     const classes = useStyles();
@@ -19,6 +21,18 @@ const Profile = () => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    console.log(user);
+
+    const formik = useFormik({
+        initialValues :{
+            userName: user.userName || '',
+            email: user.email || '',
+            password: "",
+            newPassword: "",
+        }, validationSchema: edit_user_shema,
+        onSubmit:values => console.log(values)
+    } )
 
     return (
         <div className={classes.wrapper}>
@@ -40,9 +54,9 @@ const Profile = () => {
                     <Avatar className={classes.avatar}
                             src={'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'}/>
                     <div className={classes.userInfo}>
-                        <h2 className={classes.username}>Name Surname</h2>
-                        <h3 className={classes.otherInfo}>Something</h3>
-                        <h3 className={classes.otherInfo}>Join at///</h3>
+                        <h2 className={classes.username}>{user.username}</h2>
+                        <h3 className={classes.otherInfo}>{user.role}</h3>
+                        <h3 className={classes.otherInfo}>{`Join at ${((user.registryDate).split('T'))[0]}`}</h3>
                     </div>
                     <IconButton size={'small'} className={classes.editButton} aria-label="edit" onClick={handleOpen} >
                         <Icon>edit_outlined </Icon>
@@ -53,13 +67,53 @@ const Profile = () => {
                         aria-labelledby="modal-modal-title"
                         aria-describedby="modal-modal-description"
                     >
-                        <Box>
+                        <Box className={classes.modal}>
                             <Typography id="modal-modal-title" variant="h6" component="h2">
-                                Text in a modal
+                                Edit profile
                             </Typography>
-                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                            </Typography>
+                            <form onSubmit={formik.handleSubmit}>
+                            <TextField
+                                value={formik.values.userName}
+                                onChange={formik.handleChange}
+                                fullWidth
+                                name="userName"
+                                placeholder="Enter your username"
+                                type="text"
+                            />
+                                {formik.errors.userName && formik.touched.userName ? <div>{formik.errors.userName}</div> : null}
+                                <TextField
+                                    value={formik.values.email}
+                                    onChange={formik.handleChange}
+                                    fullWidth
+                                    name="email"
+                                    placeholder="Enter your email"
+                                    type="email"
+                                />
+                                {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
+
+                                <TextField
+                                value={formik.values.password}
+                                onChange={formik.handleChange}
+                                fullWidth
+                                name="password"
+                                placeholder="Enter your password"
+                                type="password"
+                            />
+                                {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}
+                                    <TextField
+                                value={formik.values.confirmPassword}
+                                onChange={formik.handleChange}
+                                fullWidth
+                                name="newPassword"
+                                placeholder="Enter new password"
+                                type="password"
+                            />
+
+                                {formik.errors.newPassword && formik.touched.newPassword ? <div className={classes.error}>{formik.errors.newPassword}</div> : null}
+                                <Button className={classes.submitButton} type="submit" variant="contained" color="primary">
+                                    Change
+                                </Button>
+                            </form>
                         </Box>
                     </Modal>
                 </div>

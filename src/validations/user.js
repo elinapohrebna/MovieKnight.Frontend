@@ -13,3 +13,12 @@ export const register_shema = Yup.object().shape({
       .oneOf([Yup.ref("password")], "Password must be the same!")
       .required("Required!"),
   });
+
+export const edit_user_shema = Yup.object().shape({
+    userName: Yup.string().max(15, "Must be 15 characters or less").required("Required"),
+    email: Yup.string().email("Email is invalid").required("Email is required"),
+    password: Yup.string().required("Password is required"),
+    newPassword: Yup.string()
+        .notOneOf([Yup.ref("password")], "Password must be new!")
+        .required("Required!"),
+})

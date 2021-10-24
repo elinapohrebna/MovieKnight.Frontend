@@ -44,7 +44,7 @@ const Profile = () => {
                         <h3 className={classes.otherInfo}>Something</h3>
                         <h3 className={classes.otherInfo}>Join at///</h3>
                     </div>
-                    <IconButton size={'small'} className={classes.editButton} aria-label="edit" onClick={handleOpen}>
+                    <IconButton size={'small'} className={classes.editButton} aria-label="edit" onClick={handleOpen} >
                         <Icon>edit_outlined </Icon>
                     </IconButton>
                     <Modal

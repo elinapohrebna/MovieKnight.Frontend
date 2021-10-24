@@ -32,7 +32,8 @@ const dispatch = useDispatch();
   const mutation = useMutation(authenticate, {
     onSuccess: ({ user }) => {
         dispatch(ActionCreators.login(user));
-      notify("success", "Successfully logged in");
+        notify("success", "Successfully logged in");
+     
     },
     onError: () => {
         console.log("denyed");

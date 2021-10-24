@@ -10,6 +10,7 @@ const userReducer = ( state = INITIAL_STATE, action) => {
     switch(action.type) {
         case Types.LOGIN:
     console.log('login', action.payload.user)
+    sessionStorage.setItem("user", JSON.stringify(action.payload.user))
       return {
         ...state,
        user: action.payload.user,

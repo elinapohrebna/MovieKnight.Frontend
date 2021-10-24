@@ -12,8 +12,9 @@ import configureStore from './redux/store';
 import { getCurrentUser } from './api/user';
 import LoginPage from './pages/login-page'
 import RegisterPage from './pages/register-page'
-import Home from "./components/home/home";
-import Profile from "./pages/profile";
+import ConfirmMailPage from './pages/confirmEmail'
+import HomePage from './pages/homePage'
+import InfoMailPage from './pages/emailInfoPage'
 
 
 const queryClient = new QueryClient({
@@ -35,10 +36,11 @@ function App() {
     <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/home" component={HomePage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
-        <Route exact path="/profile" component={Profile} />
+        <Route path='/confirmationMail' component={ConfirmMailPage} />
+        <Route path='/infoMail' component={InfoMailPage} />
       </Switch>
     <CssBaseline />
     <ToastContainer />

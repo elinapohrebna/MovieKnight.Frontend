@@ -8,8 +8,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { ActionCreators } from "../../redux/user/user.actions"; 
 import { Link } from "react-router-dom";
-
- import toast from "../toast";
+import toast from "../toast";
 
 
 const Login = props => {
@@ -31,12 +30,25 @@ const dispatch = useDispatch();
 
   const mutation = useMutation(authenticate, {
     onSuccess: ({ user }) => {
+      console.log(user)
+      if(user.isAuthorized === true){
         dispatch(ActionCreators.login(user));
-      notify("success", "Successfully logged in");
+        notify("success", "Successfully logged in");
+      }else{
+        if (user.loginErrorCode === 0) {
+          notify("error", "invalid username or passsword");
+        }else if(user.loginErrorCode === 1){
+          notify("error", "Please congirm email first");
+        }else{
+          notify("Something went wrong");
+        }
+
+      }
+       
     },
     onError: () => {
-        console.log("denyed");
-      notify("error", "Invalid username or password, please try again!");
+        notify("Something went wrong");
+     
     },
   });
 

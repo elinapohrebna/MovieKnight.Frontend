@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Button, Icon, IconButton, LinearProgress} from "@material-ui/core";
+import {Avatar, Box, Button, Icon, IconButton, LinearProgress, Modal, Typography} from "@material-ui/core";
 import {useStyles} from "./profile.styles";
 import {Chart} from "react-google-charts";
 
@@ -16,6 +16,10 @@ const FriendRow = ({name, img}) => {
 
 const Profile = () => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
         <div className={classes.wrapper}>
         <div
@@ -40,9 +44,24 @@ const Profile = () => {
                         <h3 className={classes.otherInfo}>Something</h3>
                         <h3 className={classes.otherInfo}>Join at///</h3>
                     </div>
-                    <IconButton size={'small'} className={classes.editButton} aria-label="edit">
+                    <IconButton size={'small'} className={classes.editButton} aria-label="edit" onClick={handleOpen}>
                         <Icon>edit_outlined </Icon>
                     </IconButton>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <Box>
+                            <Typography id="modal-modal-title" variant="h6" component="h2">
+                                Text in a modal
+                            </Typography>
+                            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                            </Typography>
+                        </Box>
+                    </Modal>
                 </div>
                 <div className={classes.blocksWrapper}>
                     <div className={classes.blockInformation} style={{
@@ -115,7 +134,6 @@ const Profile = () => {
                                 title: '',
                             }}
                         />
-
                         </div>
                     </div>
                 </div>

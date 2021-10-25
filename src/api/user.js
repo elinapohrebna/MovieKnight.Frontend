@@ -24,7 +24,7 @@ export const authenticate = async user => {
 
   export const create = async data => {
     try {
-      const clientURIForEmailConfirmation = "http://localhost:4200/emailConfirmation"
+      const clientURIForEmailConfirmation = "http://localhost:4200/confirmationMail"
       const { userName, password, email  } = data;
       const user = { userName, password, email , clientURIForEmailConfirmation };
       const response = await axios.post("/api/User", user);

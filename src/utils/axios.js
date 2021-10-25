@@ -20,7 +20,6 @@ instance.interceptors.request.use(
       let accessToken = null;
       if (state.user.user != null) {
           accessToken = state.user.user.token;
-
       }
       if (token) {
           accessToken = token;
@@ -29,7 +28,6 @@ instance.interceptors.request.use(
       if (accessToken != null) {
           config.headers.Authorization = `Bearer ${accessToken}`;
       }
-      return config;
 
     return config;
   },

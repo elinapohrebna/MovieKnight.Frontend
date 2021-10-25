@@ -18,10 +18,7 @@ const FavoritesBlock = () => {
     });
 
     const res = () => {
-
-        console.log(dict);
         var dict = {};
-
         data.map(item => {
             if (item.movie.genres instanceof Array){
                 item.movie.genres.map(e => {
@@ -44,13 +41,12 @@ const FavoritesBlock = () => {
             res.push([key, dict[key]]);
         });
         res.unshift(['Genres', 'Amount of films']);
-        console.log(res);
-
         return res;
     }
 
-
     return(
+        <>
+            {status === "success" && (
         <div className={classes.blockInformation}>
             <div style={{display: 'flex', flexDirection: 'column'}}>
                 <h2 className={classes.blockTitle}>Favourite genres:</h2>
@@ -67,6 +63,8 @@ const FavoritesBlock = () => {
                 />
             </div>
         </div>
+            )}
+        </>
     )
 }
 

@@ -15,7 +15,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-   const token = JSON.parse(sessionStorage.getItem("user")).token;
+   const token = (sessionStorage.getItem("token") != null) ? JSON.parse(sessionStorage.getItem("token")) : null;
       const state = store.getState();
       let accessToken = null;
       if (state.user.user != null) {

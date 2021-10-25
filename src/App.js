@@ -15,6 +15,7 @@ import RegisterPage from './pages/register-page'
 import ConfirmMailPage from './pages/confirmEmail'
 import HomePage from './pages/homePage'
 import InfoMailPage from './pages/emailInfoPage'
+import Profile from "./pages/profile";
 
 
 const queryClient = new QueryClient({
@@ -36,11 +37,24 @@ function App() {
     <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
       <Switch>
-        <Route exact path="/home" component={HomePage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path='/confirmationMail' component={ConfirmMailPage} />
-        <Route path='/infoMail' component={InfoMailPage} />
+        <Route exact path="/home">
+          <HomePage />
+        </Route>
+        <Route path="/login">
+          <LoginPage/>
+        </Route>
+        <Route path="/register">
+          <RegisterPage/>
+        </Route>
+        <Route path='/confirmationMail'>
+          <ConfirmMailPage />
+        </Route>
+        <Route path='/infoMail'>
+          <InfoMailPage />
+        </Route>
+        <Route path='/profile'>
+          <Profile />
+        </Route>
       </Switch>
     <CssBaseline />
     <ToastContainer />

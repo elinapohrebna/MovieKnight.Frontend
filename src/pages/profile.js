@@ -16,7 +16,6 @@ const Profile = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const user = JSON.parse(sessionStorage.getItem('user')).userInfo;
-    console.log(user);
 
     return (
     <div className={classes.wrapper}>

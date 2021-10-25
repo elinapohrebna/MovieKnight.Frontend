@@ -1,8 +1,8 @@
 import Typography from "material-ui/styles/typography";
 import React from "react";
 
-const Home = () => {
+const HomeComponent = () => (
     <Typography> Home </Typography>
-}
+)
 
-export default Home;
+export default HomeComponent;

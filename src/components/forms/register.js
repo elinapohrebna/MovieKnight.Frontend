@@ -34,7 +34,7 @@ const Register = () => {
   const mutation = useMutation(create, {
     onSuccess: ({ user }) => {
       notify("success", "Your registration went successfully");
-      history.push("/login");
+      history.push("/infoMail");
     },
     onError: () => {
         console.log("denyed");
@@ -93,6 +93,7 @@ const Register = () => {
               placeholder="Enter your password once more"
               type="password"
             /> 
+            {formik.errors.confirmPassword&& formik.touched.confirmPassword ? <div>{formik.errors.confirmPassword}</div> : null}
           </Grid>
             <Grid item className={classes.buttonAllign} xs ={12}>
               <Button className={classes.button} type="submit" variant="contained" color="primary">

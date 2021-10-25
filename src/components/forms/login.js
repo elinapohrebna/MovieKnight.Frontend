@@ -6,10 +6,9 @@ import { useStyles } from "./login.styles";
 import { login_shema } from "../../validations/user";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { ActionCreators } from "../../redux/user/user.actions"; 
+import { ActionCreators } from "../../redux/user/user.actions";
 import { Link } from "react-router-dom";
-
- import toast from "../toast";
+import toast from "../toast";
 
 
 const Login = props => {
@@ -27,16 +26,28 @@ const dispatch = useDispatch();
 
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
-  }, []); 
+  }, []);
 
   const mutation = useMutation(authenticate, {
     onSuccess: ({ user }) => {
+      if(user.isAuthorized === true){
         dispatch(ActionCreators.login(user));
+        notify("success", "Successfully logged in");
+      }else{
+        if (user.loginErrorCode === 0) {
+          notify("error", "invalid username or passsword");
+        }else if(user.loginErrorCode === 1){
+          notify("error", "Please congirm email first");
+        }else{
+          notify("Something went wrong");
+        }
+
+      }
+
         notify("success", "Successfully logged in");
         window.location.href = '/profile';
     },
     onError: () => {
-        console.log("denyed");
       notify("error", "Invalid username or password, please try again!");
     },
   });

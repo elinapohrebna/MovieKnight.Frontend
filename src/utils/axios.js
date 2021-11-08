@@ -15,16 +15,20 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   config => {
-    const state = store.getState();
-    let accessToken = null;
-    if(state.user.user != null){
-      accessToken = state.user.user.token;
+   const token = (sessionStorage.getItem("token") != null) ? JSON.parse(sessionStorage.getItem("token")) : null;
+      const state = store.getState();
+      let accessToken = null;
+      if (state.user.user != null) {
+          accessToken = state.user.user.token;
+      }
+      if (token) {
+          accessToken = token;
+      }
+      console.log(accessToken);
+      if (accessToken != null) {
+          config.headers.Authorization = `Bearer ${accessToken}`;
+      }
 
-    }
-    console.log(accessToken);
-    if (accessToken != null) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
-    }
     return config;
   },
   err => Promise.reject(err)

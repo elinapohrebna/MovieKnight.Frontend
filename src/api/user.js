@@ -1,4 +1,5 @@
 import axios from "../utils/axios";
+import { instanceForLogging } from "../utils/axios";
 
 export const authenticate = async user => {
     try {
@@ -8,7 +9,7 @@ export const authenticate = async user => {
       return { user: data };
     } catch (error) {
       console.error(error);
-     throw new Error(error);
+      throw new Error(error);
     }
   };
 
@@ -32,6 +33,24 @@ export const authenticate = async user => {
       throw new Error(error);
     }
   };
+
+export const getUserFilms = async() => {
+  try{
+    const response = await axios.get("api/WatchHistory")
+    return response.data;
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
+
+export const getUserFriends = async() => {
+  try{
+    const response = await axios.get("api/Friends")
+    return response.data;
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
 
   export const confirmMail = async data => {
     try {

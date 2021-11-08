@@ -6,8 +6,8 @@ import { useStyles } from "./login.styles";
 import { login_shema } from "../../validations/user";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { ActionCreators } from "../../redux/user/user.actions"; 
-import { Link } from "react-router-dom";
+import { ActionCreators } from "../../redux/user/user.actions";
+import {Link, useHistory} from "react-router-dom";
 import toast from "../toast";
 
 
@@ -23,14 +23,14 @@ const dispatch = useDispatch();
     } )
 
   const classes = useStyles();
+    const history = useHistory();
 
-  const notify = React.useCallback((type, message) => {
+    const notify = React.useCallback((type, message) => {
     toast({ type, message });
-  }, []); 
+  }, []);
 
   const mutation = useMutation(authenticate, {
     onSuccess: ({ user }) => {
-      console.log(user)
       if(user.isAuthorized === true){
         dispatch(ActionCreators.login(user));
         notify("success", "Successfully logged in");
@@ -44,13 +44,18 @@ const dispatch = useDispatch();
         }
 
       }
-       
+
+        notify("success", "Successfully logged in");
+        redirectToProfile();
     },
     onError: () => {
-        notify("Something went wrong");
-     
+      notify("error", "Invalid username or password, please try again!");
     },
   });
+
+  const redirectToProfile = () => {
+      history.push("/profile");
+  }
 
   return (
     <Paper className={classes.paper} elevation={20}>
@@ -69,7 +74,7 @@ const dispatch = useDispatch();
              placeholder="Enter your username"
              type="text"
            />
-           
+
          </Grid>
             <Grid item className={classes.container} xs={12}>
               <TextField
@@ -80,7 +85,7 @@ const dispatch = useDispatch();
                 placeholder="Enter your password"
                 type="password"
               />
-              
+
             </Grid>
             <Grid item className={classes.buttonAllign} xs ={12}>
               <Button className={classes.button} type="submit" variant="contained" color="primary">
@@ -103,4 +108,4 @@ const dispatch = useDispatch();
   );
 };
 
-export default Login; 
+export default Login;

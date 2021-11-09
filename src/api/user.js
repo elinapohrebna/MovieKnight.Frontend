@@ -1,5 +1,5 @@
 import axios from "../utils/axios";
-import { instanceForLogging } from "../utils/axios";
+
 
 export const authenticate = async user => {
     try {
@@ -33,6 +33,21 @@ export const authenticate = async user => {
       throw new Error(error);
     }
   };
+
+  export const update = async data => {
+    try{
+      const { userName, password, newPassword, confirmPassword } = data;
+      const user = { userName, password, newPassword, confirmPassword};
+      console.log(user)
+      const response = await axios.put("/api/User", user);
+      console.log(response)
+      return response.data;
+    }catch(error){
+      console.log(error)
+      throw new Error(error);
+    }
+  };
+
 
 export const getUserFilms = async() => {
   try{

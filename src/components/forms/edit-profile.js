@@ -1,20 +1,37 @@
 import {Box, Button, Modal, TextField, Typography} from "@material-ui/core";
 import React from "react";
 import {useFormik} from "formik";
+import { useMutation } from "react-query";
 import {edit_user_shema} from "../../validations/user";
 import {useStyles} from "./edit-profile.styles";
+import { update } from "../../api/user";
+import toast from "../toast";
 
 const EditProfileModal = ({open, handleClose, values}) => {
 
     const classes = useStyles();
+
+    const mutation = useMutation(update, { 
+        onSuccess: () => {
+          notify("success", "Your data is updated");
+        },
+        onError: () => {
+            console.log("denyed");
+          notify("error", "Something went wrong");
+        },
+    })
+
+        const notify = React.useCallback((type, message) => {
+            toast({ type, message });
+          }, []); 
     const formik = useFormik({
         initialValues :{
             userName: values.userName || '',
-            email: values.email || '',
             password: values.password || '',
             newPassword: values.newPassword || '',
+            confirmPassword: values.confirmPassword || '',
         }, validationSchema: edit_user_shema,
-        onSubmit:values => console.log(values)
+        onSubmit:values => mutation.mutate(values)
     } )
 
     return (<Modal
@@ -38,16 +55,6 @@ const EditProfileModal = ({open, handleClose, values}) => {
                 />
                 {formik.errors.userName && formik.touched.userName ? <div>{formik.errors.userName}</div> : null}
                 <TextField
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    fullWidth
-                    name="email"
-                    placeholder="Enter your email"
-                    type="email"
-                />
-                {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
-
-                <TextField
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     fullWidth
@@ -57,7 +64,7 @@ const EditProfileModal = ({open, handleClose, values}) => {
                 />
                 {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}
                 <TextField
-                    value={formik.values.confirmPassword}
+                    value={formik.values.newPassword}
                     onChange={formik.handleChange}
                     fullWidth
                     name="newPassword"
@@ -66,6 +73,16 @@ const EditProfileModal = ({open, handleClose, values}) => {
                 />
 
                 {formik.errors.newPassword && formik.touched.newPassword ? <div className={classes.error}>{formik.errors.newPassword}</div> : null}
+                <TextField
+                value={formik.values.confirmPassword}
+                onChange={formik.handleChange}
+                fullWidth
+                name="confirmPassword"
+                placeholder="Confirm new password"
+                type="password"
+            />
+
+            {formik.errors.confirmPassword && formik.touched.confirmPassword ? <div className={classes.error}>{formik.errors.confirmPassword}</div> : null}
                 <Button className={classes.submitButton} type="submit" variant="contained" color="primary">
                     Change
                 </Button>

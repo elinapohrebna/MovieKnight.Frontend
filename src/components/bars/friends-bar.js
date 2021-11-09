@@ -4,12 +4,15 @@ import {useStyles} from "./friends-bar.styles";
 import {useQuery} from "react-query";
 import {getUserFriends} from "../../api/user";
 import toast from "../toast";
+import AddFriendModal from "../forms/add-friend";
 
 const FriendsBar = () => {
     const notify = React.useCallback((type, message) => {
         toast({ type, message });
     }, []);
-
+    const [open, setOpen] = React.useState(false);
+    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
     const classes = useStyles();
     const {status, data } = useQuery("getFriends", getUserFriends, {
         onError: () => {
@@ -36,8 +39,8 @@ const FriendsBar = () => {
                 <FriendRow key={i} name={item.userName} img={item.userPhoto}/>
             )) : <h2 className={classes.text}><p>You have no friends yet( </p>
             <p>But you can find some</p></h2>}
-            <Button variant="outlined" style={{color: '#ffffff', borderColor: '#ffffff'}} onClick={() => {
-            }} endIcon={<Icon>add_outlined</Icon>}>Add</Button>
+            <AddFriendModal open={open} handleClose={handleClose} />
+            <Button variant="outlined" style={{color: '#ffffff', borderColor: '#ffffff'}} onClick={handleOpen} endIcon={<Icon>add_outlined</Icon>}>Add</Button>
         </div>
     )
 };

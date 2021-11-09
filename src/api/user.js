@@ -38,12 +38,12 @@ export const authenticate = async user => {
     try{
       const { userName, password, newPassword, confirmPassword } = data;
       const user = { userName, password, newPassword, confirmPassword};
-      console.log(user)
+     
       const response = await axios.put("/api/User", user);
-      console.log(response)
+      
       return response.data;
     }catch(error){
-      console.log(error)
+      
       throw new Error(error);
     }
   };
@@ -67,9 +67,28 @@ export const getUserFriends = async() => {
   }
 }
 
+export const getUserByName = async data => {
+  try{
+  const response = await axios.get("api/User", {params: data})
+  return response.data;
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
+
+export const sendFriendRequest = async data => {
+  try{
+    const {id} = data;
+    const receiverId = id;
+    const response = await axios.post("/api/FriendsRequests", {receiverId});
+    return response.data;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
   export const confirmMail = async data => {
     try {
-      console.log(data);
       const { token, email } = data;
       const user = { token, email };
       const response = await axios.post("/api/User/confirmEmail", user);

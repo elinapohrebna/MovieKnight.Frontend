@@ -9,3 +9,27 @@ export const loadRecommendation = async () => {
         throw new Error(error.response);
     }
 };
+
+export const addToWatchHistory = async (movie) => {
+    try {
+        const response = await axios.post("/api/WatchHistory", movie);
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response);
+    }
+}
+
+export const commentFilm = async (data) => {
+    try {
+        const response = await axios.post("/api/Comments", data);
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response);
+    }
+}
+
+export const getCommentsByMovieId = async (movieId) => {
+    const {data} = await axios.get(`/api/Comments/getCommentsToMovie/${movieId}`)
+
+    return data;
+}

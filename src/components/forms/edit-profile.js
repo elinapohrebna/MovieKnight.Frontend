@@ -11,9 +11,13 @@ const EditProfileModal = ({open, handleClose, values}) => {
 
     const classes = useStyles();
 
-    const mutation = useMutation(update, { 
+    console.log(sessionStorage.getItem('user'));
+
+    const mutation = useMutation(update, {
         onSuccess: () => {
           notify("success", "Your data is updated");
+          const save = sessionStorage.getItem('user');
+          sessionStorage.setItem('user', {...save, userName: formik.values.userName});
         },
         onError: () => {
             console.log("denyed");
@@ -23,7 +27,7 @@ const EditProfileModal = ({open, handleClose, values}) => {
 
         const notify = React.useCallback((type, message) => {
             toast({ type, message });
-          }, []); 
+          }, []);
     const formik = useFormik({
         initialValues :{
             userName: values.userName || '',

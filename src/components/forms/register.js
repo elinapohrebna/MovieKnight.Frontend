@@ -4,15 +4,21 @@ import { useMutation } from "react-query";
  import { create } from "../../api/user";
 import { useStyles } from "./register.styles";
 import { register_shema } from "../../validations/user";
-import React from "react";
-import { useHistory} from "react-router-dom"; 
+import React, {useEffect} from "react";
+import { useHistory} from "react-router-dom";
  import toast from "../toast";
 
 
 const Register = () => {
-  
+
   const classes = useStyles();
   const history = useHistory();
+
+    useEffect(() => {
+        if (sessionStorage.getItem('token') !== undefined) {
+            history.push('/profile');
+        }
+    })
 
   const formik = useFormik({
     initialValues :{
@@ -29,7 +35,7 @@ const Register = () => {
 
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
-  }, []); 
+  }, []);
 
   const mutation = useMutation(create, {
     onSuccess: ({ user }) => {
@@ -67,10 +73,10 @@ const Register = () => {
              name="email"
              placeholder="Enter your email"
              type="email"
-           /> 
+           />
            {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}
          </Grid>
-           
+
          </Grid>
             <Grid item className={classes.container} xs={12}>
               <TextField
@@ -82,7 +88,7 @@ const Register = () => {
                 type="password"
               />
               {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}
-              
+
             </Grid>
             <Grid item className={classes.container} xs={12}>
             <TextField
@@ -92,7 +98,7 @@ const Register = () => {
               name="confirmPassword"
               placeholder="Enter your password once more"
               type="password"
-            /> 
+            />
             {formik.errors.confirmPassword&& formik.touched.confirmPassword ? <div>{formik.errors.confirmPassword}</div> : null}
           </Grid>
             <Grid item className={classes.buttonAllign} xs ={12}>
@@ -108,4 +114,4 @@ const Register = () => {
   );
 };
 
-export default Register; 
+export default Register;

@@ -4,16 +4,21 @@ import { useMutation } from "react-query";
  import { authenticate } from "../../api/user";
 import { useStyles } from "./login.styles";
 import { login_shema } from "../../validations/user";
-import React from "react";
+import React, {useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { ActionCreators } from "../../redux/user/user.actions";
-import {Link, useHistory} from "react-router-dom";
+import {Link, useHistory, useLocation} from "react-router-dom";
 import toast from "../toast";
 
 
 const Login = props => {
-const dispatch = useDispatch();
+    useEffect(() => {
+        if (sessionStorage.getItem('token') != null) {
+            redirectToProfile();
+        }
+    })
 
+const dispatch = useDispatch();
   const formik = useFormik({
     initialValues :{
     userName: "",
@@ -31,9 +36,11 @@ const dispatch = useDispatch();
 
   const mutation = useMutation(authenticate, {
     onSuccess: ({ user }) => {
+        console.log(user);
       if(user.isAuthorized === true){
         dispatch(ActionCreators.login(user));
-        notify("success", "Successfully logged in");
+          notify("success", "Successfully logged in");
+          redirectToProfile();
       }else{
         if (user.loginErrorCode === 0) {
           notify("error", "invalid username or passsword");
@@ -45,8 +52,6 @@ const dispatch = useDispatch();
 
       }
 
-        notify("success", "Successfully logged in");
-        redirectToProfile();
     },
     onError: () => {
       notify("error", "Invalid username or password, please try again!");

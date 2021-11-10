@@ -92,7 +92,7 @@ const RecommendFilm = () => {
                         <img
                             src={film.movieInfo.image}
                             className={classes.image}
-                            alt={film.movieInfo.title}/>
+                            alt={film.movieInfo.title} />
                     </Box>
                     <Typography variant="body2" color="text.secondary">
                         {film.movieInfo.title}

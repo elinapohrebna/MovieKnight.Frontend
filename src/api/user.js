@@ -69,6 +69,7 @@ export const getUserFriends = async() => {
 
 export const getUserByName = async data => {
   try{
+    console.log(data)
   const response = await axios.get("api/User", {params: data})
   return response.data;
   }catch (error) {

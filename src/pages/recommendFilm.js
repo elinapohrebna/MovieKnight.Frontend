@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import { styled } from '@mui/material/styles';
-import {Avatar, Box, Button, Icon, IconButton, LinearProgress, Typography} from "@material-ui/core";
+import {Avatar, Box, Button, Icon, IconButton, LinearProgress, Typography, Grid, Modal} from "@material-ui/core";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -12,10 +12,12 @@ import {useStyles} from "./recommendFilm.styles";
 import {Rating} from "@mui/material";
 import toast from "../components/toast";
 import {useMutation, useQuery} from "react-query";
-import {loadRecommendation} from "../api/film";
+import {addToWatchHistory, loadRecommendation} from "../api/film";
 import {ActionCreators} from "../redux/film/film.actions";
 import {useDispatch} from "react-redux";
 import {getUserFilms} from "../api/user";
+import MovieComment from "../components/card/movieComment/movieComment";
+import MovieComments from "../components/card/movieComments/movieComments";
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -173,23 +175,41 @@ const RecommendFilm = () => {
     [isFetching]);
 
     const classes = useStyles();
-
+    const [value, setValue] = React.useState(0);
     const notify = React.useCallback((type, message) => {
         toast({ type, message });
     }, []);
-
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [movieHistory, setMovieHistory] = React.useState({})
 
     const {status, data } = useQuery("loadRecommendation", loadRecommendation, {
         onSuccess: () => {
             console.log(data);
             setIsFetching(true);
             film = data;
-            notify("success", "Your film had been loaded");
+            notify("success", "New film has been geberated");
         },
         onError: () => {
             notify("error", "An error occured, please reload this page!");
         },
     });
+
+    const mutation = useMutation( addToWatchHistory, { 
+        onSuccess: (data) => {
+        setMovieHistory(data);
+        handleOpen();
+        notify("success", "The film is added with your rate");
+
+
+         
+        },
+        onError: () => {
+            console.log("denyed");
+          notify("error", "Something went wrong");
+        },
+    })
 
     const [expanded, setExpanded] = React.useState(false);
 
@@ -198,9 +218,12 @@ const RecommendFilm = () => {
     };
 
     return (
+        
+       
         <div className={classes.wrapper}>
             {status === "success" &&
-            (<Card sx={{width: '40vw'}}>
+            (<Box>
+                <Card sx={{width: '40vw'}}>
                 <CardContent>
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <img
@@ -213,12 +236,22 @@ const RecommendFilm = () => {
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
-                    <IconButton aria-label="add to list">
-                        <AddIcon/>
-                    </IconButton>
+                <Typography component="legend">Share with friends:  </Typography>
                     <IconButton aria-label="share">
                         <ShareIcon/>
                     </IconButton>
+                    <Typography component="legend">Rate when whatched:  </Typography>
+                    <Rating
+                     name="simple-controlled"
+                     max={10}
+                     value={value}
+                     onChange={(event, newValue) => {
+                     setValue(newValue);
+                     const rating = newValue;
+                     const movieId= film.id
+                     const movie = {rating, movieId}
+                     mutation.mutate(movie)
+                     }} />
                     <ExpandMore
                         expand={expanded}
                         onClick={handleExpandClick}
@@ -254,18 +287,33 @@ const RecommendFilm = () => {
                         </Typography>
                     </CardContent>
                 </Collapse>
-            </Card>)
+            </Card>
+          
+            <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+    > 
+    <MovieComment movieHistory={movieHistory} />
+    </Modal>
+            
+            <Button
+            //={classes.button}
+            type="submit"
+            variant="contained"
+            color="primary"
+            onClick={() => {console.log('click');
+            setIsFetching(true)}}>
+            Generate new
+            </Button>
+            <MovieComments film={film} />
+            </Box>
+            )
             }
-                <Button
-                className={classes.button}
-                type="submit"
-                variant="contained"
-                color="primary"
-                onClick={() => {console.log('click');
-                setIsFetching(true)}}>
-                Generate new
-                </Button>
+               
         </div>
+       
     )
 };
 

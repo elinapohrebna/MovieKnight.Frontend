@@ -12,10 +12,10 @@ export const useStyles = makeStyles({
         minWidth: 180,
         padding: '2% 1%',
         backgroundColor:'#a2505c',
-        opacity: 0.85,
+        opacity: 1,
         '&:hover': {
             backgroundColor: '#a2505c',
-            opacity: 1,
+            opacity: 0.85,
         },
     },
     friendRow : {

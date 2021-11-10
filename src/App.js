@@ -17,6 +17,7 @@ import HomePage from './pages/homePage'
 import InfoMailPage from './pages/emailInfoPage'
 import Profile from "./pages/profile";
 import RecommendFilm from "./pages/recommendFilm";
+import Navbar from "./components/bars/navbar";
 
 
 const queryClient = new QueryClient({
@@ -32,11 +33,13 @@ if (typeof window !== "undefined") {
 
 export const store = configureStore();
 
+
 function App() {
   return (
     <Provider store={store}>
     <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
+      <Navbar />
       <Switch>
         <Route exact path="/home">
           <HomePage />

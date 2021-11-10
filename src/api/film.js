@@ -11,33 +11,25 @@ export const loadRecommendation = async () => {
 };
 
 export const addToWatchHistory = async (movie) => {
-    try{
+    try {
         const response = await axios.post("/api/WatchHistory", movie);
         return response.data;
-    }catch (error) {
+    } catch (error) {
         throw new Error(error.response);
     }
 }
 
 export const commentFilm = async (data) => {
-    try{
+    try {
         const response = await axios.post("/api/Comments", data);
         return response.data;
-    }catch (error) {
+    } catch (error) {
         throw new Error(error.response);
     }
 }
 
-export const getCommentsByMovieId = async (data) => {
-    try{
-        const {queryKey} = data
-      const  movieId = queryKey[0];
-    
-      const movie = {movieId: movieId}
-      console.log(movie)
-        const response = await axios.get("/api/Comments/getCommentsToMovie", {params: movie})
-        return response.data;
-    }catch (error) {
-        throw new Error(error.response);
-    }
+export const getCommentsByMovieId = async (movieId) => {
+    const {data} = await axios.get(`/api/Comments/getCommentsToMovie/${movieId}`)
+
+    return data;
 }

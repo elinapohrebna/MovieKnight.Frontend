@@ -16,6 +16,7 @@ import ConfirmMailPage from './pages/confirmEmail'
 import HomePage from './pages/homePage'
 import InfoMailPage from './pages/emailInfoPage'
 import Profile from "./pages/profile";
+import RecommendFilm from "./pages/recommendFilm";
 
 
 const queryClient = new QueryClient({
@@ -54,6 +55,9 @@ function App() {
         </Route>
         <Route path='/profile'>
           <Profile />
+        </Route>
+        <Route path='/recommend'>
+          <RecommendFilm />
         </Route>
       </Switch>
     <CssBaseline />

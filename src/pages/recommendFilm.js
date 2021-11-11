@@ -53,9 +53,13 @@ const RecommendFilm = () => {
         refetchOnWindowFocus: false,
         enabled: false,
         onSuccess: () => {
-            setFilm(data);
-            console.log(data);
-            notify("success", "Your film had been loaded");
+            if (data){
+                setFilm(data);
+                console.log(data);
+                notify("success", "Your film had been loaded");
+            } else {
+                refetch();
+            }
         },
         onError: () => {
             notify("error", "An error occured, please reload this page!");

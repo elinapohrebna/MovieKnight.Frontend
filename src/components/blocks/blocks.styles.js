@@ -36,6 +36,8 @@ export const useStyles = makeStyles({
         paddingRight: 25,
         borderRadius: 5,
         boxShadow: '0px 0px 10px lightgray',
+        overflow: 'scroll',
+        overflowX: 'hidden',
     },
     table: {
         textAlign: 'left',
@@ -74,7 +76,10 @@ export const useStyles = makeStyles({
     chart: {
         display: "flex",
         width:400,
-        height: 160,
+        height: 150,
         padding: 0,
     },
+    item: {
+        height: '20%',
+    }
 });

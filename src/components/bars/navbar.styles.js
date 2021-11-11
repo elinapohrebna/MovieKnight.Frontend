@@ -6,8 +6,11 @@ export const useStyles = makeStyles({
         display: "flex",
     },
     logo: {
+        display: 'flex',
+        alignItems: 'flex-end',
+        justifyContent: 'flex-start',
         flexGrow: "1",
-        cursor: "pointer",
+        cursor: "default",
     },
     link: {
         display: 'flex',
@@ -20,6 +23,7 @@ export const useStyles = makeStyles({
         "&:hover": {
             color: 'pink',
             textDecoration: "none",
+            cursor: 'pointer',
         },
     },
 });

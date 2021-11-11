@@ -1,4 +1,4 @@
-import {AppBar, Avatar, Button, Icon, Link, Toolbar, Typography} from "@material-ui/core";
+import {AppBar, Avatar, Box, Button, Icon, Link, Toolbar, Typography} from "@material-ui/core";
 import React, {useEffect, useState} from "react";
 import {useStyles} from "./navbar.styles";
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -12,7 +12,7 @@ const Navbar = () => {
     const classes = useStyles();
     const history = useHistory();
     const [condition, setCondition] = useState(false);
-    const defPages = ['/login', '/register'];
+    const defPages = ['/login', '/register', '/'];
 
     useEffect(() => {
        setCondition(!defPages.includes(location.pathname));
@@ -25,23 +25,29 @@ const Navbar = () => {
         return (
             <AppBar position="static">
                 <Toolbar>
-                    <Typography variant="h4" className={classes.logo} onClick={() => history.push("/home")}>
+                    <Typography variant="h4" className={classes.logo}>
                             MovieKNight
                             <img src={movieKnight} width={50} height={50}/>
                     </Typography>
                     <div className={classes.navlinks}>
-                        <Link to="/contact" className={classes.link}>
-                            Recommendation
-                            <MovieFilterIcon onClick={() => {history.push("/recommend");}}/>
-                        </Link>
-                        <Link to="/contact" className={classes.link}>
+                                <Typography
+                                    className={classes.link}
+                                    onClick={() => {history.push("/recommend");}}>
+                                    Recommendation
+                                    <MovieFilterIcon/>
+                                </Typography>
+                        <Typography
+                            className={classes.link}
+                            onClick={() => {history.push("/profile");}}>
                             Profile
-                            <PersonOutlineIcon onClick={() => {history.push("/profile");}}/>
-                        </Link>
-                        <Link to="/login" className={classes.link}>
-                            <LogoutIcon onClick={() => {sessionStorage.removeItem('token');
-                                history.push("/login");}}/>
-                        </Link>
+                            <PersonOutlineIcon/>
+                        </Typography>
+                        <Typography
+                            className={classes.link}
+                            onClick={() => {sessionStorage.removeItem('token');
+                                history.push("/login");}}>
+                            <LogoutIcon/>
+                        </Typography>
                     </div>
                 </Toolbar>
             </AppBar>

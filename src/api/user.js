@@ -1,4 +1,5 @@
 import axios from "../utils/axios";
+import friendsRequestStatuses from "../consts";
 
 
 export const authenticate = async user => {
@@ -70,7 +71,7 @@ export const getUserFriends = async() => {
 export const getUserFriendsRequests = async() => {
   try{
     const response = await axios.get("/api/FriendsRequests/requestsToUser")
-    return response.data;
+    return response.data.filter((i)=> i.friendRequestStatus === friendsRequestStatuses.Pending);
   }catch (error) {
     throw new Error(error.response);
   }

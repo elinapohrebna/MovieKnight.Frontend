@@ -1,5 +1,5 @@
 import {Avatar, Button, Icon} from "@material-ui/core";
-import React from "react";
+import React, {useEffect} from "react";
 import {useStyles} from "./blocks.styles";
 import {useQuery} from "react-query";
 import {getUserFriends} from "../../api/user";
@@ -24,12 +24,18 @@ const FriendsRows = () => {
     const handleClose = () => setOpen(false);
     const handleOpen = () => setOpen(true);
     const classes = useStyles();
-    const {status, data } = useQuery("getFriends", getUserFriends, {
+
+    useEffect(()=>{
+        refetch();
+    }, [])
+
+    const {status, data, refetch } = useQuery("getFriends", getUserFriends, {
         onError: () => {
             notify("error", "An error occured, please reload this page!");
         },
         onSuccess: () => {
-            setFriends(data);
+            if (data !== undefined) setFriends(data);
+            else refetch();
         }
     });
 

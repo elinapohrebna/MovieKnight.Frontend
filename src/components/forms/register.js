@@ -15,7 +15,7 @@ const Register = () => {
   const history = useHistory();
 
     useEffect(() => {
-        if (sessionStorage.getItem('token') !== undefined) {
+        if (sessionStorage.getItem('token') !== null) {
             history.push('/profile');
         }
     })

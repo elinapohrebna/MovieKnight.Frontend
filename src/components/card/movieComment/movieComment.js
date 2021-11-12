@@ -6,19 +6,20 @@ import toast from "../../toast";
 
 import React from "react";
 import { commentFilm } from "../../../api/film";
+import moment from "moment";
 
-const MovieComment = (movieHistory) => {
+const MovieComment = ({movieHistory, movieId}) => {
   const classes = useStyles();
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
 }, []);
-  const mutation = useMutation( commentFilm, { 
+  const mutation = useMutation( commentFilm, {
     onSuccess: (data) => {
-  
+
     notify("success", "Your comment is added");
-     
+
     },
-    onError: () => {
+    onError: (error) => {
         console.log("denyed");
       notify("error", "Something went wrong");
     },
@@ -26,12 +27,13 @@ const MovieComment = (movieHistory) => {
   const formik = useFormik({
     initialValues :{
         commentText: '',
-    }, 
+    },
     onSubmit:comment => {
         console.log(comment)
         const commentText = comment.commentText;
-        const WatchHistoryId = movieHistory.movieHistory.id;
-        const data = { commentText, WatchHistoryId }
+        const commentDate = moment().utc().format();
+        const appUserId = JSON.parse(sessionStorage.getItem('user')).userId;
+        const data = { id: movieId, commentText, commentDate, appUserId, movieId };
         console.log(data);
         mutation.mutate(data);
     }

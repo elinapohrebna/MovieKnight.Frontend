@@ -38,12 +38,12 @@ export const authenticate = async user => {
     try{
       const { userName, password, newPassword, confirmPassword } = data;
       const user = { userName, password, newPassword, confirmPassword};
-     
+
       const response = await axios.put("/api/User", user);
-      
+
       return response.data;
     }catch(error){
-      
+
       throw new Error(error);
     }
   };
@@ -61,6 +61,15 @@ export const getUserFilms = async() => {
 export const getUserFriends = async() => {
   try{
     const response = await axios.get("api/Friends")
+    return response.data;
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
+
+export const getUserFriendsRequests = async() => {
+  try{
+    const response = await axios.get("/api/FriendsRequests/requestsToUser")
     return response.data;
   }catch (error) {
     throw new Error(error.response);
@@ -98,3 +107,9 @@ export const sendFriendRequest = async data => {
       throw new Error(error);
     }
   };
+
+export const putToFriends = async (senderId, receiverId, friendRequestStatus, requestDate) => {
+  const {data} = await axios.put(`/api/FriendsRequests`, {senderId: senderId, receiverId: receiverId, friendRequestStatus: friendRequestStatus, requestDate: requestDate})
+
+  return data;
+}

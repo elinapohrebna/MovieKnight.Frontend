@@ -81,5 +81,37 @@ export const useStyles = makeStyles({
     },
     item: {
         height: '20%',
-    }
+    },
+    friendsContainer: {
+        display: 'flex',
+        overflow: 'scroll',
+        overflowX: 'hidden',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '15vw',
+        minWidth: 180,
+        minHeight: '20%',
+        padding: '2% 1%',
+        backgroundColor:'#a2505c',
+        opacity: 1,
+        '&:hover': {
+            backgroundColor: '#a2505c',
+            opacity: 0.85,
+        },
+    },
+    friendRow : {
+        paddingLeft: '30px',
+        minWidth: '6vw',
+        maxWidth: '15vw',
+        display:'flex',
+        flexDirection:'row',
+        justifyContent: 'space-between',
+        gap: 10,
+        alignItems: 'center',
+        alignSelf: 'flex-start',
+        marginBottom: 10,
+        color: '#000000',
+        fontSize: 12,
+    },
 });

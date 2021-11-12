@@ -101,7 +101,7 @@ const dispatch = useDispatch();
               <Grid item xs={12}>
                 <Typography variant="body1">
                   Don't have an account?{" "}
-                  <Link to="/register">
+                  <Link to="/register" onClick={()=> {history.push('/register')}}>
                     Sign up
                   </Link>
                 </Typography>

@@ -44,7 +44,7 @@ const Navbar = () => {
                         </Typography>
                         <Typography
                             className={classes.link}
-                            onClick={() => {sessionStorage.removeItem('token');
+                            onClick={() => {sessionStorage.clear();
                                 history.push("/login");}}>
                             <LogoutIcon/>
                         </Typography>

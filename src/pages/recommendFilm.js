@@ -162,7 +162,7 @@ const RecommendFilm = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
     >
-    <MovieComment movieHistory={movieHistory} />
+    <MovieComment movieHistory={movieHistory} movieId = {film.id} />
     </Modal>)}
 
             <Button

@@ -3,7 +3,6 @@ import {store} from "../App"
 
 const instance = axios.create({
   baseURL:'https://movieknightweb.azurewebsites.net',
-  timeout: 4000,
   responseType: "json",
   headers: {
     "Content-Type": "application/json",

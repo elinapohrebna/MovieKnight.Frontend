@@ -14,7 +14,7 @@ const HistoryBlock = () => {
         toast({ type, message });
     }, []);
 
-    const {status, data } = useQuery("watchHistory", getUserFilms, {
+    const {status, data, refetch } = useQuery("watchHistory", getUserFilms, {
         onSuccess: () => {
             if (data) {
                 const filteredData = [];
@@ -25,7 +25,10 @@ const HistoryBlock = () => {
                         filteredData.push(e);
                     }
                     setHistory(filteredData);
-                })}
+                })} else {
+                refetch();
+            }
+            console.log(data);
         },
         onError: () => {
             notify("error", "An error occured, please reload this page!");

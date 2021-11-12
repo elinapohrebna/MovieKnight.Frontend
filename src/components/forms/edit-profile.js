@@ -6,19 +6,22 @@ import {edit_user_shema} from "../../validations/user";
 import {useStyles} from "./edit-profile.styles";
 import { update } from "../../api/user";
 import toast from "../toast";
+import {useHistory} from "react-router-dom";
 
 const EditProfileModal = ({open, handleClose, values}) => {
 
     const classes = useStyles();
+    const history = useHistory();
 
     console.log(sessionStorage.getItem('user'));
 
     const mutation = useMutation(update, {
         onSuccess: () => {
           notify("success", "Your data is updated");
-          const save = sessionStorage.getItem('user');
-          sessionStorage.setItem('user', {...save, userName: formik.values.userName});
-        },
+          const save = JSON.parse(sessionStorage.getItem('user'));
+          sessionStorage.removeItem('token');
+          history.push('/login');
+          },
         onError: () => {
             console.log("denyed");
           notify("error", "Something went wrong");

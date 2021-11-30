@@ -48,10 +48,6 @@ const FriendsRequests = () => {
     }, [isFetching])
 
     const {status, data, refetch } = useQuery("getFriendsRequests", getUserFriendsRequests, {
-        onError: () => {
-            refetch();
-            notify("error", "An error occured, please reload this page!");
-        },
         onSuccess: () => {
             console.log(data);
             if (data !== undefined) setRequests(data);

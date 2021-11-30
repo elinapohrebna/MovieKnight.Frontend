@@ -64,18 +64,19 @@ export const useStyles = makeStyles({
         alignContent: 'space-between'
     },
     avatar: {
-        position: "relative",
-        top: -50,
+       position: "relative",
+        top: -30,
         left: 20,
-        width: 150,
-        height: 150,
+        width: 120,
+        height: 120,
         border: "7px solid white",
-        boxShadow: '2px 2px 10px gray'
+        boxShadow: '2px 2px 10px gray',
     },
     userInfo: {
         display: 'flex',
         flexDirection: 'column',
         marginLeft: 40,
+       
     },
     username: {
         fontSize: 20,
@@ -111,6 +112,7 @@ export const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
+        marginTop: 30,
     },
     movieText: {
         fontSize: 14,

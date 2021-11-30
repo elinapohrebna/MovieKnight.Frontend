@@ -4,16 +4,29 @@ import {useStyles} from "./blocks.styles";
 import {useQuery} from "react-query";
 import {getUserFriends} from "../../api/user";
 import toast from "../toast";
+import { useHistory } from "react-router-dom";
 
-const FriendRow = ({name, img}) => {
+const FriendRow = ({name, img, item}) => {
     const classes = useStyles();
+    const history = useHistory();
+
+    const redirectToFriendPage = item => {
+        console.log(item)
+        sessionStorage.setItem('friend', JSON.stringify(item));
+        history.push("/friend")
+    }
+    
     return(
         <div className={classes.friendRow}>
-            <Avatar src={img}/>
-            <h3>{name}</h3>
+            <Avatar onClick={()=> { redirectToFriendPage(item) }
+        }  src={img}/>
+            <h3 className={classes.friendName}>{name}</h3>
         </div>
     )
+ 
 };
+
+
 
 const FriendsRows = () => {
     const notify = React.useCallback((type, message) => {
@@ -35,22 +48,27 @@ const FriendsRows = () => {
         },
         onSuccess: () => {
             if (data !== undefined) setFriends(data);
-            else refetch();
+           else refetch();
         }
     });
 
-    return (
+    return ( 
+        <>
+        {status === "success" && (
         <div
             className={classes.friendsContainer}
         >
             <h2 className={classes.blockTitle} >Friends</h2>
             {(friends && friends.length > 0) ? friends.map((item, i) => (
-                <FriendRow key={i} name={item.userName} img={item.userPhoto}/>
+                <FriendRow key={i} item={item} name={item.userName} img={item.userPhoto}/>
             )) : <h2 className={classes.text}><p>You have no friends yet( </p>
                 <p>But you can find some</p></h2>}
             </div>
     )
-};
+}
+</>
+ )}
+       
 
 export default FriendsRows;
 

@@ -114,4 +114,11 @@ export const useStyles = makeStyles({
         color: '#000000',
         fontSize: 12,
     },
+    friendName: {
+        "&:hover": {
+            textDecoration: "none",
+            cursor: 'pointer',
+        },
+
+    }
 });

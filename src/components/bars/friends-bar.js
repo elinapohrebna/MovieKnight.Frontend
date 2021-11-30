@@ -7,6 +7,7 @@ import toast from "../toast";
 import AddFriendModal from "../forms/add-friend";
 import FriendsRows from "../blocks/friends-block";
 import FriendsRequests from "../blocks/requests-block";
+import UserFriendsRequests from "../blocks/user-requests-block";
 
 const FriendsBar = () => {
     const notify = React.useCallback((type, message) => {
@@ -26,6 +27,7 @@ const FriendsBar = () => {
             <AddFriendModal open={open} handleClose={handleClose} />
             <Button variant="outlined" style={{color: '#ffffff', borderColor: '#ffffff'}} onClick={handleOpen} endIcon={<Icon>add_outlined</Icon>}>Add</Button>
             <FriendsRequests />
+            <UserFriendsRequests />
         </div>
     )
 };

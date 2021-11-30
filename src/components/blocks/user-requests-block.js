@@ -2,39 +2,22 @@ import {Avatar, Icon, IconButton} from "@material-ui/core";
 import React, {useEffect} from "react";
 import {useStyles} from "./blocks.styles";
 import {useMutation, useQuery} from "react-query";
-import {getUserFriendsRequests, putToFriends} from "../../api/user";
+import { getRequestsFromUser } from "../../api/user";
 import toast from "../toast";
 import friendsRequestStatuses from '../../consts';
 import moment from "moment";
 
-const RequestRow = ({name, img, id, notify, setIsFetching}) => {
+const UserRequestRow = ({name, img }) => {
     const classes = useStyles();
-    const userId = JSON.parse(sessionStorage.getItem('user')).userInfo.userId;
-    const status = friendsRequestStatuses.Accepted;
-
-    const mutation = useMutation('AddToFriends',
-        () => putToFriends(id, userId, status, moment().utc().format()), {
-            onSuccess: () => {
-                setIsFetching(true);
-            },
-            onError: () => {
-                notify("error", "An error occured");
-            },
-        });
-
     return(
         <div className={classes.friendRow}>
             <Avatar src={img}/>
             <h3>{name}</h3>
-            <IconButton variant="outlined" style={{color: '#ffffff', borderColor: '#ffffff', borderWidth: '3px'}} onClick={() => {
-                console.log({senderId: id, friendRequestStatus: (friendsRequestStatuses.Accepted), requestDate: moment().utc().format()});
-                mutation.mutate(id, friendsRequestStatuses.Accepted)
-            }}><Icon>add_outlined</Icon></IconButton>
         </div>
     )
 };
 
-const FriendsRequests = () => {
+const UserFriendsRequests = () => {
     const notify = React.useCallback((type, message) => {
         toast({ type, message });
     }, []);
@@ -47,7 +30,7 @@ const FriendsRequests = () => {
         setIsFetching(false);
     }, [isFetching])
 
-    const {status, data, refetch } = useQuery("getFriendsRequests", getUserFriendsRequests, {
+    const {status, data, refetch } = useQuery("getRequestsFromUser", getRequestsFromUser, {
         onError: () => {
             refetch();
             notify("error", "An error occured, please reload this page!");
@@ -63,13 +46,13 @@ const FriendsRequests = () => {
         <div
             className={classes.friendsContainer}
         >
-            <h2 className={classes.blockTitle} >Requests to you</h2>
+            <h2 className={classes.blockTitle} >Requests from  you</h2>
             {(requests && requests.length > 0) ? requests.map((item, i) => (
-                <RequestRow key={i} notify={notify} name={item.sender.userName} img={item.sender.userPhoto} id={item.senderId} setIsFetchin={setIsFetching}/>
+                <UserRequestRow key={i} notify={notify} name={item.receiver.userName} img={item.receiver.userPhoto} id={item.receiverId} setIsFetchin={setIsFetching}/>
             )) : <h2 className={classes.text}><p>You have no requests( </p></h2>}
             </div>
     )
 };
 
-export default FriendsRequests;
+export default UserFriendsRequests;
 

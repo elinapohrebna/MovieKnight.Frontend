@@ -77,6 +77,24 @@ export const getUserFriendsRequests = async() => {
   }
 }
 
+export const getRequestsFromUser = async() => {
+  try{
+    const response = await axios.get("/api/FriendsRequests/userPendingRequests")
+    return response.data.filter((i)=> i.friendRequestStatus === 0);
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
+
+export const deleteUserFriend = async (id) => {
+  try{
+  const response = await axios.delete(`/api/Friends/${id}`)
+  return response.data;
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
+
 export const getUserByName = async data => {
   try{
     console.log(data)

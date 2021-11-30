@@ -114,4 +114,9 @@ export const useStyles = makeStyles({
         color: '#000000',
         fontSize: 12,
     },
+    buttonDelete:{
+        backgroundColor: "#db330d",
+        width: "18px",
+        height: "15px"
+    }
 });

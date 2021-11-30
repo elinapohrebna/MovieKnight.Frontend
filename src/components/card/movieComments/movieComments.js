@@ -11,8 +11,9 @@ const MovieComments = ({film}) => {
     const classes = useStyles();
     const [comments, setComments] = React.useState([]);
     const {status, data} = useQuery('movieId',
-        () => getCommentsByMovieId(movieId).then((data)=> setComments(data)));
-
+        () => getCommentsByMovieId(movieId).then((data)=> setComments(data)) 
+       );
+       console.log(comments)
     const notify = React.useCallback((type, message) => {
         toast({type, message});
     }, []);
@@ -20,8 +21,8 @@ const MovieComments = ({film}) => {
     return (
         <Card className={classes.paper}>
             <Grid container direction="column" alignItems="center">
-                {comments === [] && (<Typography> This film has no comments yet </Typography>)}
-                {comments !== [] && comments.map((movie, index) => <CommentCard key={index} movie={movie}/>)}
+                {comments.length === 0 && (<Typography> This film has no comments yet </Typography>)}
+                {comments.length !== 0 &&  comments.map((movie, index) => <CommentCard key={index} movie={movie}/>)}
             </Grid>
         </Card>
     );

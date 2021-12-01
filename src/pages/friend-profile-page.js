@@ -31,7 +31,7 @@ const FriendProfile = () => {
                     <Avatar className={classes.avatar}
                             src={'https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg'}/>
                     <div className={classes.userInfo}>
-                        <h2 className={classes.username}>{friend.userName}</h2>
+                        <h2 className={classes.username}>{friend.username}</h2>
                         <h3 className={classes.otherInfo}>{friend.role}</h3>
                         <h3 className={classes.otherInfo}>{`Join at ${((friend.registryDate).split('T'))[0]}`}</h3>
                     </div>

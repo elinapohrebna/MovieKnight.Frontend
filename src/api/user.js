@@ -80,7 +80,16 @@ export const getUserFriendsRequests = async() => {
 export const getRequestsFromUser = async() => {
   try{
     const response = await axios.get("/api/FriendsRequests/userPendingRequests")
-    return response.data.filter((i)=> i.friendRequestStatus === 0);
+    return response.data.filter((i)=> i.friendRequestStatus === friendsRequestStatuses.Pending);
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
+
+export const getDeclinedRequestsFromUser = async() => {
+  try{
+    const response = await axios.get("/api/FriendsRequests/requestsToUser")
+    return response.data.filter((i)=> i.friendRequestStatus === friendsRequestStatuses.Denied);
   }catch (error) {
     throw new Error(error.response);
   }

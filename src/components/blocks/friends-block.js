@@ -5,22 +5,31 @@ import {useQuery} from "react-query";
 import {getUserFriends} from "../../api/user";
 import toast from "../toast";
 import DeleteFriendModal from "../forms/delete-frend";
+import {useHistory} from "react-router-dom";
 
-const FriendRow = ({name, img, id}) => {
+const FriendRow = ({name, img, item}) => {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
-    const handleClose = () => setOpen(false);
-    const handleOpen = () => setOpen(true);
+    const history = useHistory();
+
+    const redirectToFriendPage = item => {
+        console.log(item)
+        sessionStorage.setItem('friend', JSON.stringify(item));
+        history.push("/friend")
+    }
+
     console.log(name);
+
     return(
         <div className={classes.friendRow}>
-            <Avatar src={img}/>
-            <h3>{name}</h3>
-            <Button className={classes.buttonDelete} onClick={handleOpen}> Delete </Button>
-            <DeleteFriendModal open={open} handleClose={handleClose} id={id}/>
+            <Avatar onClick={()=> { redirectToFriendPage(item) }
+            }  src={img}/>
+            <h3 className={`${classes.friendName} ${classes.text}`}>{name}</h3>
         </div>
     )
+
 };
+
+
 
 const FriendsRows = () => {
     const notify = React.useCallback((type, message) => {
@@ -43,22 +52,28 @@ const FriendsRows = () => {
         onSuccess: () => {
             if (data !== undefined) setFriends(data);
             else refetch();
-            console.log(friends);
         }
     });
 
     return (
-        <div
-            className={classes.friendsContainer}
-        >
-            <h2 className={classes.blockTitle} >Friends</h2>
-            {(friends && friends.length > 0) ? friends.map((item, i) => (
-                <FriendRow key={i} name={item.username} img={item.userPhoto} id={item.id}/>
-            )) : <h2 className={classes.text}><p>You have no friends yet( </p>
-                <p>But you can find some</p></h2>}
-            </div>
-    )
-};
+        <>
+            {status === "success" && (
+                <div
+                    className={classes.friendsContainer}
+                >
+                    <h2 className={classes.blockTitle} >Friends</h2>
+                    {(friends && friends.length > 0) ? friends.map((item, i) => {
+                        console.log(item);
+                        return (
+                            <FriendRow key={i} item={item} name={item.username} img={item.userPhoto}/>
+                        )
+                    }) : <h2 className={classes.text}><p>You have no friends yet( </p>
+                        <p>But you can find some</p></h2>}
+                </div>
+            )
+            }
+        </>
+    )}
+
 
 export default FriendsRows;
-

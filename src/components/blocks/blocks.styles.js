@@ -84,8 +84,7 @@ export const useStyles = makeStyles({
     },
     friendsContainer: {
         display: 'flex',
-        overflow: 'scroll',
-        overflowX: 'hidden',
+        overflow: 'auto',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -114,9 +113,17 @@ export const useStyles = makeStyles({
         color: '#000000',
         fontSize: 12,
     },
+
     buttonDelete:{
         backgroundColor: "#db330d",
         width: "18px",
         height: "15px"
+    },
+
+    friendName: {
+        "&:hover": {
+            textDecoration: "none",
+            cursor: 'pointer',
+        },
     }
 });

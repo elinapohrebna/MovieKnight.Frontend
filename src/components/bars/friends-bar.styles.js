@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const useStyles = makeStyles({
     friendsContainer: {
         display: 'flex',
-        overflow: 'scroll',
+        overflowY: 'auto',
         overflowX: 'hidden',
         flexDirection: 'column',
         alignItems: 'center',
@@ -13,10 +13,6 @@ export const useStyles = makeStyles({
         padding: '2% 1%',
         backgroundColor:'#a2505c',
         opacity: 1,
-        '&:hover': {
-            backgroundColor: '#a2505c',
-            opacity: 0.85,
-        },
     },
     friendRow : {
         minWidth: '6vw',
@@ -50,4 +46,12 @@ export const useStyles = makeStyles({
         padding: 0,
         margin:0,
     },
+
+    radioGroup: {
+        display: 'flex',
+        flexDirection: 'row',
+        position: 'absolute',
+        bottom: 50,
+    },
+
 });

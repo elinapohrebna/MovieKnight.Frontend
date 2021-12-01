@@ -84,7 +84,8 @@ export const useStyles = makeStyles({
     },
     friendsContainer: {
         display: 'flex',
-        overflow: 'auto',
+        overflowY: 'auto',
+        overflowX: 'hidden',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',

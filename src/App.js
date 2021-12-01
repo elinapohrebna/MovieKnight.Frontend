@@ -18,6 +18,7 @@ import InfoMailPage from './pages/emailInfoPage'
 import Profile from "./pages/profile";
 import RecommendFilm from "./pages/recommendFilm";
 import Navbar from "./components/bars/navbar";
+import FriendProfile from './pages/friend-profile-page'
 
 
 const queryClient = new QueryClient({
@@ -62,6 +63,9 @@ function App() {
         <Route path='/recommend'>
           <RecommendFilm />
         </Route>
+        <Route path='/friend'>
+        <FriendProfile />
+      </Route>
       </Switch>
     <CssBaseline />
     <ToastContainer />

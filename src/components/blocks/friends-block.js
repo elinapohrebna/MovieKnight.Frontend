@@ -9,6 +9,8 @@ import {useHistory} from "react-router-dom";
 
 const FriendRow = ({name, img, item}) => {
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
     const history = useHistory();
 
     const redirectToFriendPage = item => {
@@ -17,19 +19,19 @@ const FriendRow = ({name, img, item}) => {
         history.push("/friend")
     }
 
+    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true);
     console.log(name);
 
     return(
         <div className={classes.friendRow}>
-            <Avatar onClick={()=> { redirectToFriendPage(item) }
-            }  src={img}/>
-            <h3 className={`${classes.friendName} ${classes.text}`}>{name}</h3>
+            <Avatar src={img} onClick={()=> redirectToFriendPage(item) }/>
+            <h3 className={classes.friendName} onClick={()=>  redirectToFriendPage(item) }>{name}</h3>
+            <Button className={classes.buttonDelete} onClick={handleOpen}> Delete </Button>
+            <DeleteFriendModal open={open} handleClose={handleClose} id={item.id}/>
         </div>
     )
-
 };
-
-
 
 const FriendsRows = () => {
     const notify = React.useCallback((type, message) => {
@@ -52,28 +54,22 @@ const FriendsRows = () => {
         onSuccess: () => {
             if (data !== undefined) setFriends(data);
             else refetch();
+            console.log(friends);
         }
     });
 
     return (
-        <>
-            {status === "success" && (
-                <div
-                    className={classes.friendsContainer}
-                >
-                    <h2 className={classes.blockTitle} >Friends</h2>
-                    {(friends && friends.length > 0) ? friends.map((item, i) => {
-                        console.log(item);
-                        return (
-                            <FriendRow key={i} item={item} name={item.username} img={item.userPhoto}/>
-                        )
-                    }) : <h2 className={classes.text}><p>You have no friends yet( </p>
-                        <p>But you can find some</p></h2>}
-                </div>
-            )
-            }
-        </>
-    )}
-
+        <div
+            className={classes.friendsContainer}
+        >
+            <h2 className={classes.blockTitle} >Friends</h2>
+            {(friends && friends.length > 0) ? friends.map((item, i) => (
+                <FriendRow key={i} name={item.username} img={item.userPhoto} item={item}/>
+            )) : <h2 className={classes.text}><p>You have no friends yet( </p>
+                <p>But you can find some</p></h2>}
+        </div>
+    )
+};
 
 export default FriendsRows;
+

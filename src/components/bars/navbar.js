@@ -13,14 +13,12 @@ const Navbar = () => {
     const history = useHistory();
     const [condition, setCondition] = useState(false);
     const defPages = ['/login', '/register', '/'];
+    const user = JSON.parse(sessionStorage.getItem('user'))?.userInfo;
 
     useEffect(() => {
        setCondition(!defPages.includes(location.pathname));
     }, [location])
 
-    console.log(location.pathname);
-
-    console.log(condition);
     if (condition) {
         return (
             <AppBar position="static">
@@ -30,12 +28,12 @@ const Navbar = () => {
                             <img src={movieKnight} width={50} height={50}/>
                     </Typography>
                     <div className={classes.navlinks}>
-                                <Typography
+                                { user?.role !== "Admin" && (<Typography
                                     className={classes.link}
                                     onClick={() => {history.push("/recommend");}}>
                                     Recommendation
                                     <MovieFilterIcon/>
-                                </Typography>
+                                </Typography>)}
                         <Typography
                             className={classes.link}
                             onClick={() => {history.push("/profile");}}>

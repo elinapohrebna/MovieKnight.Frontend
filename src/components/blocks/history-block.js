@@ -28,7 +28,6 @@ const HistoryBlock = () => {
                 })} else {
                 refetch();
             }
-            console.log(data);
         },
         onError: () => {
             notify("error", "An error occured, please reload this page!");

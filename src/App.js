@@ -82,7 +82,6 @@ App.getInitialProps = async context =>  {
   const appProps = await App.getInitialProps(context);
   try{
     const user = await getCurrentUser();
-    console.log(user);
     const pageProps = { ...appProps, user };
     return {
       pageProps,

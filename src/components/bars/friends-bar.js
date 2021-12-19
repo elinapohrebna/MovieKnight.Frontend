@@ -21,7 +21,6 @@ const FriendsBar = () => {
 
     const [page, setPage] = React.useState(0);
     const handleChange = (value) => {
-        console.log(value);
         setPage(parseInt(value, 10));
     };
 

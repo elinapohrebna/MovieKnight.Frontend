@@ -14,14 +14,12 @@ const FriendRow = ({name, img, item}) => {
     const history = useHistory();
 
     const redirectToFriendPage = item => {
-        console.log(item)
         sessionStorage.setItem('friend', JSON.stringify(item));
         history.push("/friend")
     }
 
     const handleClose = () => setOpen(false);
     const handleOpen = () => setOpen(true);
-    console.log(name);
 
     return(
         <div className={classes.friendRow}>
@@ -54,7 +52,6 @@ const FriendsRows = () => {
         onSuccess: () => {
             if (data !== undefined) setFriends(data);
             else refetch();
-            console.log(friends);
         }
     });
 

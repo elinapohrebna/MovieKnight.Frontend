@@ -9,14 +9,8 @@ import moment from "moment";
 
 const CommentCard = ({movie}) => {
   const classes = useStyles();
-
-  console.log('Movie', movie);
-
-  console.log('DB', movie.commentDate);
   var gmtDateTime = moment.utc(movie.commentDate);
-  console.log('UTC', gmtDateTime);
   var local = gmtDateTime.local().format('YYYY MMM DD | HH:mm');
-  console.log('Local', local);
 
   return (
     <Card className={classes.paper}>

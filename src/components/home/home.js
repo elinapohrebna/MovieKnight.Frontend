@@ -19,7 +19,7 @@ const HomeComponent = () => {
             <div className={classes.welcomePage}>
                 <div className={classes.bar}>
                     <div>
-                        <h1 className={classes.header}>Welcom to MovieKNight!</h1>
+                        <h1 className={classes.header}>Welcome to MovieKNight!</h1>
                     </div>
                     <div>
                         <button 

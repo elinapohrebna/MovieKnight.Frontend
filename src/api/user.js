@@ -1,5 +1,5 @@
 import axios from "../utils/axios";
-import friendsRequestStatuses from "../consts";
+import {friendsRequestStatuses} from "../consts";
 
 
 export const authenticate = async user => {

@@ -3,6 +3,7 @@ import toast from "../toast";
 import {useQuery} from "react-query";
 import {useStyles} from "./comments-management.style";
 import {getAllComments, deleteComment} from '../../api/comments'
+import moment from "moment";
 
 const CommentsManagement = () => {
     const header = ["#", "CommentText", "CommentDate", "Actions"]
@@ -34,6 +35,11 @@ const CommentsManagement = () => {
         }
     }
 
+    const getDateInNeededFromat = (date) => {
+        var gmtDateTime = moment.utc(date);
+        return gmtDateTime.local().format('YYYY MMM DD | HH:mm');
+    }
+
     return (
         <>
         {status === "success" && (
@@ -48,7 +54,7 @@ const CommentsManagement = () => {
                 <tr className={classes.tableRow} key={i}>
                     <td>{i + 1}</td>
                     <td>{data.commentText}</td>
-                    <td>{((data.commentDate).split('T'))[0]}</td>
+                    <td>{getDateInNeededFromat(data.commentDate)}</td>
                     <td><button className={classes.deleteBtn} onClick={() => {onDeleteBtnClick(data.id)}}>Delete</button></td>
                 </tr>
                 );

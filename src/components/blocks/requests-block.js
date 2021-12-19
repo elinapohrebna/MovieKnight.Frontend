@@ -4,7 +4,7 @@ import {useStyles} from "./blocks.styles";
 import {useMutation, useQuery} from "react-query";
 import {getUserFriendsRequests, putToFriends} from "../../api/user";
 import toast from "../toast";
-import friendsRequestStatuses from '../../consts';
+import {friendsRequestStatuses} from '../../consts';
 import moment from "moment";
 
 const RequestRow = ({name, img, id, notify, setIsFetching}) => {

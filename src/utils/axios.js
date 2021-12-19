@@ -2,13 +2,11 @@ import axios from "axios";
 import {store} from "../App"
 
 const instance = axios.create({
-  // baseURL:'https://localhost:5001',
   baseURL:'https://movieknightweb.azurewebsites.net',
   responseType: "json",
   headers: {
     "Content-Type": "application/json",
   },
- // withCredentials: true,
 });
 
 

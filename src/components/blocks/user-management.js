@@ -3,6 +3,7 @@ import toast from "../toast";
 import {useQuery} from "react-query";
 import {getAllUsers, deleteUser} from "../../api/user";
 import {useStyles} from "./user-management.style";
+import moment from "moment";
 
 const UserManagement = () => {
     const header = ["#", "UserName", "Email", "Registry Date", "Actions"]
@@ -32,6 +33,12 @@ const UserManagement = () => {
         setUsers(res);
     }
 
+    const getDateInNeededFromat = (date) => {
+        var gmtDateTime = moment.utc(date);
+        return gmtDateTime.local().format('YYYY MMM DD | HH:mm');
+    }
+
+
     return (
         <>
         {status === "success" && (
@@ -47,7 +54,7 @@ const UserManagement = () => {
                     <td>{i + 1}</td>
                     <td>{data.userName}</td>
                     <td>{data.email}</td>
-                    <td>{((data.registryDate).split('T'))[0]}</td>
+                    <td>{getDateInNeededFromat(data.registryDate)}</td>
                     <td><button className={classes.deleteBtn} onClick={() => {onDeleteBtnClick(data.id)}}>Delete</button></td>
                 </tr>
                 );

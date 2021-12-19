@@ -4,9 +4,11 @@ import { useMutation } from "react-query";
 import toast from "../../toast";
 import React from "react";
 import { sendFriendRequest } from "../../../api/user";
+import { useHistory } from "react-router-dom";
 
 const UserCard = (user) => {
   const classes = useStyles();
+  const history = useHistory();
   const notify = React.useCallback((type, message) => {
     toast({ type, message });
   }, []); 
@@ -24,14 +26,25 @@ const handleClick = () => {
     
     mutation.mutate(user.user)
 };
+const handleProfile = (item) => { 
+    
+  sessionStorage.setItem('friend', JSON.stringify(item));
+  history.push("/friend")
+  console.log(item);
+};
 
   return (
     <Card className={classes.paper}>
       <Grid container direction="raw" alignItems="center">
-      <Grid item xs={9} >
+      <Grid item xs={6} >
         <Typography className={classes.title} variant="body1">
         {user.user.userName}
         </Typography>
+        </Grid>
+        <Grid item xs={3} >
+        <Button  onClick={()=> {handleProfile(user.user)}} >
+        See profile
+        </Button>
         </Grid>
         <Grid item xs={3} >
         <Button  onClick={handleClick} >

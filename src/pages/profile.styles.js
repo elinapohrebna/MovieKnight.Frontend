@@ -207,4 +207,9 @@ export const useStyles = makeStyles({
         height: 160,
         padding: 0,
     },
+    privateCard :{
+        marginTop: 100,
+        marginLeft: 430,
+        padding: 20
+    }
 });

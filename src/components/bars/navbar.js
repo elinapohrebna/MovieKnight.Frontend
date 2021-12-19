@@ -43,7 +43,7 @@ const Navbar = () => {
                         <Typography
                             className={classes.link}
                             onClick={() => {sessionStorage.clear();
-                                history.push("/login");}}>
+                                history.push("/home");}}>
                             <LogoutIcon/>
                         </Typography>
                     </div>

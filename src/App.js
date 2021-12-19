@@ -1,6 +1,6 @@
 import React from 'react'
 import { ThemeProvider } from '@material-ui/core/styles'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { QueryClient, QueryClientProvider } from "react-query"
 import theme from './styles/theme';
@@ -19,6 +19,7 @@ import Profile from "./pages/profile";
 import RecommendFilm from "./pages/recommendFilm";
 import Navbar from "./components/bars/navbar";
 import FriendProfile from './pages/friend-profile-page'
+import {useLocation} from "react-router-dom";
 
 
 const queryClient = new QueryClient({
@@ -36,12 +37,16 @@ export const store = configureStore();
 
 
 function App() {
+  const location = useLocation();
   return (
     <Provider store={store}>
     <QueryClientProvider client={queryClient}>
     <ThemeProvider theme={theme}>
-      <Navbar />
+      {(location.pathname !== "/home" && location.pathname !== "/") && <Navbar />}
       <Switch>
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
         <Route exact path="/home">
           <HomePage />
         </Route>

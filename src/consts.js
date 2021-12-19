@@ -7,3 +7,9 @@ export const friendsRequestStatuses = {
 export const roles = {
     admin: "Admin"
 }
+
+export const storyVisibility = {
+    private: 0,
+    friendsOnly: 1, 
+    public: 2
+}

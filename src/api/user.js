@@ -1,5 +1,5 @@
 import axios from "../utils/axios";
-import friendsRequestStatuses from "../consts";
+import {friendsRequestStatuses} from "../consts";
 
 
 export const authenticate = async user => {
@@ -9,7 +9,6 @@ export const authenticate = async user => {
       } = await axios.post("/api/Auth/token", user);
       return { user: data };
     } catch (error) {
-      console.error(error);
       throw new Error(error);
     }
   };
@@ -68,6 +67,15 @@ export const getUserFriends = async() => {
   }
 }
 
+export const getAllUsers = async() => {
+  try{
+    const response = await axios.get("api/User/getAllUsers")
+    return response.data;
+  }catch (error) {
+    throw new Error(error.response);
+  }
+}
+
 export const getUserFriendsRequests = async() => {
   try{
     const response = await axios.get("/api/FriendsRequests/requestsToUser")
@@ -104,9 +112,17 @@ export const deleteUserFriend = async (id) => {
   }
 }
 
+export const deleteUser = async (id) => {
+  try{
+    const response = await axios.delete(`/api/User/${id}`)
+    return response.data;
+    }catch (error) {
+      throw new Error(error.response);
+    }
+}
+
 export const getUserByName = async data => {
   try{
-    console.log(data)
   const response = await axios.get("api/User", {params: data})
   return response.data;
   }catch (error) {

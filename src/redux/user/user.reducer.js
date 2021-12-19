@@ -9,7 +9,6 @@ const userReducer = ( state = INITIAL_STATE, action) => {
     // eslint-disable-next-line default-case
     switch(action.type) {
         case Types.LOGIN:
-            console.log('login', action.payload.user);
             sessionStorage.setItem('user', JSON.stringify(action.payload.user));
             sessionStorage.setItem('token', JSON.stringify(action.payload.user.token));
             return {

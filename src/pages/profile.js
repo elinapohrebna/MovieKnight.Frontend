@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {Avatar, Box, Button, Icon, IconButton, LinearProgress} from "@material-ui/core";
 import {useStyles} from "./profile.styles";
 import {Chart} from "react-google-charts";
+import {roles} from "../consts"; 
 
 import EditProfileModal from "../components/forms/edit-profile";
 import FriendsBar from "../components/bars/friends-bar";
@@ -9,6 +10,7 @@ import HistoryBlock from "../components/blocks/history-block";
 import OthersBlock from "../components/blocks/others-block";
 import FavoritesBlock from "../components/blocks/favorites-block";
 import ChartBlock from "../components/blocks/chart-block";
+import AdminBar from "../components/bars/admin-bar"
 
 const Profile = () => {
     const classes = useStyles();
@@ -19,7 +21,7 @@ const Profile = () => {
 
     return (
     <div className={classes.wrapper}>
-        <FriendsBar />
+        {user?.role !== roles.admin && (<FriendsBar />)}
             <div className={classes.mainContainer}>
                 <div className={classes.topPanel} style={{backgroundImage: `url('https://www.widsmob.com/wp-content/uploads/2018/02/skyline-panoramic-photography.jpg')`}}>
                 </div>
@@ -36,12 +38,16 @@ const Profile = () => {
                     </IconButton>
                     <EditProfileModal open={open} handleClose={handleClose} values={{userName: user.userName, email: user.email, password: user.password, newPassword:  user.newPassword}}/>
                 </div>
-                <div className={classes.blocksWrapper}>
+                {user?.role !== roles.admin && (<div className={classes.blocksWrapper}>
                     <HistoryBlock />
                     <OthersBlock />
                     <FavoritesBlock/>
                     <ChartBlock />
-                </div>
+                </div>)}
+                {user?.role === roles.admin && 
+                <div className={classes.adminBar}>
+                    <AdminBar />
+                </div>}
                 </div>
         </div>
 )

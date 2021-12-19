@@ -4,7 +4,7 @@ import {useStyles} from "./blocks.styles";
 import {useMutation, useQuery} from "react-query";
 import {getUserFriendsRequests, putToFriends} from "../../api/user";
 import toast from "../toast";
-import friendsRequestStatuses from '../../consts';
+import {friendsRequestStatuses} from '../../consts';
 import moment from "moment";
 
 const RequestRow = ({name, img, id, notify, setIsFetching}) => {
@@ -27,7 +27,6 @@ const RequestRow = ({name, img, id, notify, setIsFetching}) => {
             <Avatar src={img}/>
             <h3>{name}</h3>
             <IconButton variant="outlined" style={{color: '#ffffff', borderColor: '#ffffff', borderWidth: '3px'}} onClick={() => {
-                console.log({senderId: id, friendRequestStatus: (friendsRequestStatuses.Accepted), requestDate: moment().utc().format()});
                 mutation.mutate(id, friendsRequestStatuses.Accepted)
             }}><Icon>add_outlined</Icon></IconButton>
         </div>
@@ -49,7 +48,6 @@ const FriendsRequests = () => {
 
     const {status, data, refetch } = useQuery("getFriendsRequests", getUserFriendsRequests, {
         onSuccess: () => {
-            console.log(data);
             if (data !== undefined) setRequests(data);
             else refetch();
         }

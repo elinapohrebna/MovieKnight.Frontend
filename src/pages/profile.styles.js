@@ -6,6 +6,11 @@ export const useStyles = makeStyles({
         flexDirection:'row',
         backgroundColor: '#eeeeee'
     },
+    adminBar: {
+        display:'flex',
+        flexDirection:'row',
+        width: '100%'
+    },
     friendsContainer: {
         display: 'flex',
         overflow: 'scroll',

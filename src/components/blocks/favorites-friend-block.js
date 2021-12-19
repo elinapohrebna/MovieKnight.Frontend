@@ -21,7 +21,6 @@ const FavoritesFriendBlock = ({watchHistory}) => {
                 </tr>
                 </thead>
                 {watchHistory.map((item, i) => {
-                    console.log(item);
                     return (
                         <tr key={item.id}>
                             <td>{i+1}</td>

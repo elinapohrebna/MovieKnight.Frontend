@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Avatar, Box, Button, Icon, IconButton, LinearProgress} from "@material-ui/core";
+import {Avatar, Box, Button, Icon, IconButton, LinearProgress, Card, Typography} from "@material-ui/core";
 import {useStyles} from "./profile.styles";
 import {Chart} from "react-google-charts";
 
@@ -14,6 +14,32 @@ import HistoryFriendBlock from "../components/blocks/history-friend-block";
 import FavoritesFriendBlock from "../components/blocks/favorites-friend-block";
 import ChartFriendBlock from "../components/blocks/chart-friend-block";
 
+
+
+const PrivateWatch = () => {
+    const classes = useStyles();
+    return (
+        <Card className={classes.privateCard}>
+        <Typography>
+        Unfortunatelly, this profile data is shared only with friends
+        </Typography>
+        </Card>
+        )
+}
+
+const PublicWatch = () => {
+    const classes = useStyles();
+    const friend = JSON.parse(sessionStorage.getItem('friend'));
+return(
+    <div className={classes.blocksWrapper}>
+        <HistoryFriendBlock watchHistory={friend.watchHistory}/>
+        <OthersBlock />
+        <FavoritesFriendBlock watchHistory={friend.watchHistory}/>
+        <ChartFriendBlock watchHistory={friend.watchHistory} />
+    </div>
+)
+}
+
 const FriendProfile = () => {
     const classes = useStyles();
     const history = useHistory();
@@ -21,7 +47,8 @@ const FriendProfile = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const friend = JSON.parse(sessionStorage.getItem('friend'));
-
+    const user = JSON.parse(sessionStorage.getItem('user'));
+    console.log(friend.storyVisibility)
     return (
     <div className={classes.wrapper}>
             <div className={classes.mainContainer}>
@@ -39,13 +66,13 @@ const FriendProfile = () => {
                     <Button onClick={() => {history.push("/profile");}} > Back to Profile </Button>
                     </div>
                 </div>
-                <div className={classes.blocksWrapper}>
-                    <HistoryFriendBlock watchHistory={friend.watchHistory}/>
-                    <OthersBlock />
-                    <FavoritesFriendBlock watchHistory={friend.watchHistory}/>
-                    <ChartFriendBlock watchHistory={friend.watchHistory} />
-
+                <div>
+               
+            { friend.storyVisibility === 0 && !friend.friends.includes(user.userInfo.username) ?  <PrivateWatch /> : <PublicWatch/>}
+                    
                 </div>
+              
+               
                 </div>
         </div>
 )

@@ -16,6 +16,7 @@ const AddFriendModal = ({open, handleClose }) => {
     const mutation = useMutation(getUserByName, { 
         onSuccess: (data) => {
           setUsers(data);
+          console.log(data);
          
         },
         onError: () => {

@@ -48,6 +48,14 @@ export const authenticate = async user => {
     }
   };
 
+  export const updateWatchHistoryVisibility = async (status) => {
+    try{
+      const response = await axios.put(`/api/User/updateWatchHistoryStatus/${status}`);
+      return response.data;
+    }catch(error){
+      throw new Error(error);
+    } 
+  }
 
 export const getUserFilms = async() => {
   try{

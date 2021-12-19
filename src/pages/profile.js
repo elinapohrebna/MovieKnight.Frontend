@@ -2,7 +2,8 @@ import React, {useState} from "react";
 import {Avatar, Box, Button, Icon, IconButton, LinearProgress} from "@material-ui/core";
 import {useStyles} from "./profile.styles";
 import {Chart} from "react-google-charts";
-import {roles} from "../consts"; 
+import {roles, storyVisibility} from "../consts"; 
+import toast from "../components/toast";
 
 import EditProfileModal from "../components/forms/edit-profile";
 import FriendsBar from "../components/bars/friends-bar";
@@ -11,6 +12,7 @@ import OthersBlock from "../components/blocks/others-block";
 import FavoritesBlock from "../components/blocks/favorites-block";
 import ChartBlock from "../components/blocks/chart-block";
 import AdminBar from "../components/bars/admin-bar"
+import {updateWatchHistoryVisibility} from "../api/user"
 
 const Profile = () => {
     const classes = useStyles();
@@ -18,6 +20,30 @@ const Profile = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const user = JSON.parse(sessionStorage.getItem('user')).userInfo;
+    const [watchHistoryVisibility, setWatchHistoryVisibility] = React.useState(user?.storyVisibility);
+
+    const notify = React.useCallback((type, message) => {
+        toast({ type, message });
+    }, []);
+
+
+    const onWatchHistoryVisibilityChanged = (event) => {
+        const watchHistoryVisibility = Number(event.target.value);
+
+        const response = updateWatchHistoryVisibility(watchHistoryVisibility);
+
+        if (response) {
+            // updating session storage info
+            const userSessionInfo = JSON.parse(sessionStorage.getItem('user'));
+            userSessionInfo.userInfo.storyVisibility = watchHistoryVisibility;
+            sessionStorage.setItem('user', JSON.stringify(userSessionInfo));
+
+            // updating state
+            setWatchHistoryVisibility(watchHistoryVisibility);
+
+            notify("success", "Watch history visibility was changed successfully")
+        }
+    }
 
     return (
     <div className={classes.wrapper}>
@@ -32,6 +58,16 @@ const Profile = () => {
                         <h2 className={classes.username}>{user.username}</h2>
                         <h3 className={classes.otherInfo}>{user.role}</h3>
                         <h3 className={classes.otherInfo}>{`Join at ${((user.registryDate).split('T'))[0]}`}</h3>
+                        {user?.role !== roles.admin && (<div className="watchHistoryConfiguration">
+                            <p className={classes.watchHistoryVisibility}>Watch history visibility:</p>
+                            <div>
+                                <select value={watchHistoryVisibility} onChange={onWatchHistoryVisibilityChanged}>
+                                    <option value={storyVisibility.private}>Private</option>
+                                    <option value={storyVisibility.friendsOnly}>Friends Only</option>
+                                    <option value={storyVisibility.public}>Public</option>
+                                </select>
+                            </div>
+                        </div>)}
                     </div>
                     <IconButton size={'small'} className={classes.editButton} aria-label="edit" onClick={handleOpen} >
                         <Icon>edit_outlined </Icon>

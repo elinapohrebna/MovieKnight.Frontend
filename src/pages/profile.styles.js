@@ -103,6 +103,18 @@ export const useStyles = makeStyles({
         margin:0,
         fontFamily: "Roboto",
     },
+    watchHistoryVisibility: {
+        fontSize: 14,
+        padding: 0,
+        margin:0,
+        fontFamily: "Roboto",
+        htmlFontSize: 16,
+        fontWeightRegular: 200,
+        fontWeightLight: 200,
+    },
+    watchHistoryConfiguration: {
+        display: "flex",
+    },
     editButton: {
         alignSelf: 'flex-start',
         backgroundColor: '#6180a6',

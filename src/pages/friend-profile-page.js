@@ -21,7 +21,7 @@ const PrivateWatch = () => {
     return (
         <Card className={classes.privateCard}>
         <Typography>
-        Unfortunatelly, this profile data is shared only with friends
+        Unfortunatelly, you don't have a permission to see this profile
         </Typography>
         </Card>
         )

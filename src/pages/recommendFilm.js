@@ -90,7 +90,7 @@ const RecommendFilm = () => {
     return (
         <div className={classes.wrapper}>
             {film &&
-            (<Card sx={{width: '40vw'}}>
+            (<Card sx={{width: '40vw', backgroundColor: '#29282D', color: '#F1EEE9', svg: '#F1EEE9'}}>
                 <CardContent>
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                         <img

@@ -7,17 +7,17 @@ export const useStyles = makeStyles({
         left: '50vw',
         transform: 'translate(-50%, -50%)',
         width: 520,
-        backgroundColor: 'white',
-        border: '1 solid black',
+        backgroundColor: '#F1EEE9',
+        border: '1 solid #29282D',
         borderRadius: 5,
         padding: 20,
-        
+
     },
     search:{
         width: 450,
     },
     buttonDelete:{
-        backgroundColor: "#db330d",
+        backgroundColor: "#7A3D3D",
         flex: 1,
         alignSelf: 'center',
         marginLeft: '50%',
@@ -28,7 +28,7 @@ export const useStyles = makeStyles({
         fontSize: 14,
         fontWeightLight: 200,
         fontWeightRegular: 200,
-        color: '#702433',
+        color: '#7A3D3D',
         padding: 5,
         margin:0,
         fontFamily: "Roboto",

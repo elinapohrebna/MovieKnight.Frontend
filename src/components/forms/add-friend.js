@@ -13,11 +13,11 @@ const AddFriendModal = ({open, handleClose }) => {
     const classes = useStyles();
     const [users, setUsers] = useState([])
 
-    const mutation = useMutation(getUserByName, { 
+    const mutation = useMutation(getUserByName, {
         onSuccess: (data) => {
           setUsers(data);
           console.log(data);
-         
+
         },
         onError: () => {
             console.log("denyed");
@@ -27,11 +27,11 @@ const AddFriendModal = ({open, handleClose }) => {
 
         const notify = React.useCallback((type, message) => {
             toast({ type, message });
-          }, []); 
+          }, []);
     const formik = useFormik({
         initialValues :{
             userName: '',
-        }, 
+        },
         onSubmit:values => mutation.mutate(values)
     } )
 
@@ -44,11 +44,11 @@ const AddFriendModal = ({open, handleClose }) => {
         <Box className={classes.modal}>
         <Grid container alignItems="center"  direction="row">
         <Grid item xs={12}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            <Typography id="modal-modal-title" variant="h6" component="h2" style={{color: '#F1EEE9'}}>
                 Search friends
             </Typography>
             </Grid>
-       
+
             <form onSubmit={formik.handleSubmit}>
             <Grid item xs={6}>
                 <TextField
@@ -59,11 +59,14 @@ const AddFriendModal = ({open, handleClose }) => {
                     name="userName"
                     placeholder="Enter username"
                     type="text"
+                    InputProps={{
+                        classes: {input: classes.textField}
+                    }}
                 />
                 {formik.errors.userName && formik.touched.userName ? <div>{formik.errors.userName}</div> : null}
                 </Grid>
                 <Grid item xs={3}>
-               <Button className={classes.submitButton} type="submit" variant="contained" color="primary">
+               <Button className={classes.submitButton} type="submit" variant="contained" color="secondary">
                     SEARCH
                 </Button>
                 </Grid>

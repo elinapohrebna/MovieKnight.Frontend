@@ -4,7 +4,7 @@ import {useStyles} from "./navbar.styles";
 import LogoutIcon from '@mui/icons-material/Logout';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import MovieFilterIcon from '@mui/icons-material/MovieFilter';
-import movieKnight from '../../assets/movieKnight.png';
+import movieKnight from '../../assets/movie.png';
 import {useHistory, useLocation} from "react-router-dom";
 
 const Navbar = () => {
@@ -22,10 +22,10 @@ const Navbar = () => {
     if (condition) {
         return (
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar className={classes.bar}>
                     <Typography variant="h4" className={classes.logo}>
                             MovieKNight
-                            <img src={movieKnight} width={50} height={50}/>
+                            <img style={{borderRadius: '50px', boxShadow: '0px 0px 2px #29282D'}} src={movieKnight} width={50} height={50}/>
                     </Typography>
                     <div className={classes.navlinks}>
                                 { user?.role !== "Admin" && (<Typography

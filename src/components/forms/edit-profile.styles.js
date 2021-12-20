@@ -12,17 +12,19 @@ export const useStyles = makeStyles({
         left: '50vw',
         transform: 'translate(-50%, -50%)',
         width: 400,
-        backgroundColor: 'white',
+        backgroundColor: '#615C60',
         border: '1 solid black',
+        boxShadow: '10px 10px 10px black',
         borderRadius: 5,
         padding: 30,
         gap: 10,
+        color: '#F1EEE9',
     },
     error: {
         fontSize: 14,
         fontWeightLight: 200,
         fontWeightRegular: 200,
-        color: '#702433',
+        color: '#7A3D3D',
         padding: 5,
         margin:0,
         fontFamily: "Roboto",
@@ -33,5 +35,12 @@ export const useStyles = makeStyles({
         marginLeft: '50%',
         marginTop: 10,
         transform: 'translate(-50%, 0%)',
+        color: '#F1EEE9'
     },
+    textField: {
+        "&::placeholder": {
+            color: "#c8c6d2"
+        },
+        color: '#F1EEE9',
+    }
 });

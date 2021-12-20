@@ -11,6 +11,7 @@ export const useStyles = makeStyles({
     marginTop: 10,
     marginRight: 10,
     marginBottom: 20,
+    color: '#F1EEE9'
   },
   buttonAllign: {
     display: "flex",
@@ -19,7 +20,7 @@ export const useStyles = makeStyles({
     alignItems: "center",
   },
   avatar: {
-    backgroundColor: "#335477",
+    backgroundColor: "#6869AC",
   },
   container: {
     marginTop: 10,
@@ -30,4 +31,16 @@ export const useStyles = makeStyles({
   signUpBtn: {
     fontSize: "0.875rem",
   },
+  text: {
+    color: '#c8c6d2'
+  },
+  link: {
+    color: '#6869AC',
+  },
+  textField: {
+    "&::placeholder": {
+      color: "#c8c6d2"
+    },
+    color: '#F1EEE9',
+  }
 });

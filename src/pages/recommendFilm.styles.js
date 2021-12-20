@@ -5,7 +5,7 @@ export const useStyles = makeStyles({
         display:'flex',
         minHeight: '100vh',
         flexDirection:'column',
-        backgroundColor: '#eeeeee',
+        backgroundColor: '#29282D',
         padding: '50px',
         alignItems: 'center',
         justifyContent: 'flex-start',
@@ -15,6 +15,7 @@ export const useStyles = makeStyles({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: '#29282D',
     },
     image: {
         display: 'flex',

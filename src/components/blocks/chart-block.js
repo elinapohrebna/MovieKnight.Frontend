@@ -66,13 +66,21 @@ const FavoritesBlock = () => {
                 <h2 className={classes.blockTitle}>Favourite genres:</h2>
                 <Chart
                     className={classes.chart}
-
                     chartType="PieChart"
                     loader={<div>Loading Chart</div>}
                     data={res()
                         }
                     options={{
                         title: '',
+                        'backgroundColor': 'transparent',
+                        color: '#F1EEE9',
+                        annotations: {textStyle:{color: '#FFF'}},
+                        legendTextStyle: {
+                            color: '#FFF'
+                        },
+                        titleTextStyle: {
+                            color: '#FFF'
+                        },
                     }}
                 />
             </div>

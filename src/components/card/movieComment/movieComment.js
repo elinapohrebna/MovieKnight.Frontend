@@ -56,6 +56,9 @@ const MovieComment = ({movieHistory, movieId}) => {
             name="commentText"
             placeholder="Type your comment"
             type="text"
+            InputProps={{
+                classes: {input: classes.textField}
+            }}
         />
         {formik.errors.commentText && formik.touched.commentText ? <div>{formik.errors.commentText}</div> : null}
         </Grid>

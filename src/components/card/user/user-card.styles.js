@@ -11,6 +11,6 @@ export const useStyles = makeStyles({
     marginTop: 10,
   },
   title:{
-    color: 'black',
+    color: '#615C60',
   }
 });

@@ -11,7 +11,7 @@ const StatisticsAdmin = () => {
 
     const [dateFrom, setDateFrom] = useState(new Date());
     const [dateTo, setDateTo] = useState(new Date());
-    const [statistics, setStatistics] = useState(undefined);
+    const [statistics, setStatistics] = useState();
     const classes = useStyles();
     const notify = React.useCallback((type, message) => {
         toast({type, message});
@@ -84,7 +84,7 @@ const StatisticsAdmin = () => {
                     <div className={classes.circle}>
                         <h3>{statistics.averageRating}</h3>
                     </div>
-                    <h3 className={classes.text}>Average rating:</h3>
+                    <h3 className={classes.text}>Average rating</h3>
                 </div>
             </div>
             }

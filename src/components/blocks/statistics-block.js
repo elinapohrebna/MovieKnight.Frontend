@@ -20,11 +20,8 @@ const StatisticsAdmin = () => {
     const mutation = useMutation(getStatistics, {
         onSuccess: (data) => {
             setStatistics(data);
-            console.log(data);
-
         },
         onError: () => {
-            console.log("denyed");
             notify("error", "Something went wrong");
         },
     })

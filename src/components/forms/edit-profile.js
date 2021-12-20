@@ -59,6 +59,9 @@ const EditProfileModal = ({open, handleClose, values}) => {
                     name="userName"
                     placeholder="Enter your username"
                     type="text"
+                    InputProps={{
+                        classes: {input: classes.textField}
+                    }}
                 />
                 {formik.errors.userName && formik.touched.userName ? <div>{formik.errors.userName}</div> : null}
                 <TextField
@@ -68,6 +71,9 @@ const EditProfileModal = ({open, handleClose, values}) => {
                     name="password"
                     placeholder="Enter your password"
                     type="password"
+                    InputProps={{
+                        classes: {input: classes.textField}
+                    }}
                 />
                 {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}
                 <TextField
@@ -77,6 +83,9 @@ const EditProfileModal = ({open, handleClose, values}) => {
                     name="newPassword"
                     placeholder="Enter new password"
                     type="password"
+                    InputProps={{
+                        classes: {input: classes.textField}
+                    }}
                 />
 
                 {formik.errors.newPassword && formik.touched.newPassword ? <div className={classes.error}>{formik.errors.newPassword}</div> : null}
@@ -87,10 +96,13 @@ const EditProfileModal = ({open, handleClose, values}) => {
                 name="confirmPassword"
                 placeholder="Confirm new password"
                 type="password"
+                InputProps={{
+                    classes: {input: classes.textField}
+                }}
             />
 
             {formik.errors.confirmPassword && formik.touched.confirmPassword ? <div className={classes.error}>{formik.errors.confirmPassword}</div> : null}
-                <Button className={classes.submitButton} type="submit" variant="contained" color="primary">
+                <Button className={classes.submitButton} type="submit" variant="contained" color="secondary">
                     Change
                 </Button>
             </form>

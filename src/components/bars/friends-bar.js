@@ -1,8 +1,6 @@
-import {Avatar, Button, Icon, Radio, RadioGroup} from "@material-ui/core";
+import {Button, Icon} from "@material-ui/core";
 import React from "react";
 import {useStyles} from "./friends-bar.styles";
-import {useQuery} from "react-query";
-import {getUserFriends} from "../../api/user";
 import toast from "../toast";
 import AddFriendModal from "../forms/add-friend";
 import FriendsRows from "../blocks/friends-block";
@@ -41,7 +39,7 @@ const FriendsBar = () => {
             <>
                 <FriendsRows />
                 <AddFriendModal open={open} handleClose={handleClose} />
-                <Button variant="outlined" style={{color: '#ffffff', borderColor: '#ffffff'}} onClick={handleOpen} endIcon={<Icon>add_outlined</Icon>}>Add</Button>
+                <Button variant="contained" style={{color: '#F1EEE9', borderColor: '#6869AC', backgroundColor: '#6869AC'}} onClick={handleOpen} endIcon={<Icon>add_outlined</Icon>}>Add</Button>
         </>
         )
     }

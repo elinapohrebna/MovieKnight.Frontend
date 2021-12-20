@@ -4,21 +4,21 @@ const theme = createTheme({
   palette: {
     type: "light",
     primary: {
-      main: "#702433",
-      light:"#a2505c",
-      dark:"#40000c",
-      contrastText: "#ffffff",
+      main: "#615C60",
+      light:"#7D6460",
+      dark:"#29282D",
+      contrastText: "#F1EEE9",
     },
-    contrastText: "#ffffff",
+    contrastText: "#F1EEE9",
     secondary: {
-      main: "#335477",
-      light: "#6180a6",
-      dark: "#002c4b",
-      contrastText: "rgba(0,0,0,0.89)",
+      main: "#6869AC",
+      light: "#9595c4",
+      dark: "#3b3b6e",
+      contrastText: "#29282D",
     },
     background: {
-      default: "#f5f7f7",
-      paper: "#ffffff",
+      default: "#29282D",
+      paper: "#29282D",
     },
   },
   root: { flexGrow: 1, fontFamily: "Roboto" },
@@ -31,7 +31,16 @@ const theme = createTheme({
     fontWeightLight: 200,
     fontWeightRegular: 300,
     htmlFontSize: 16,
+    color: '#F1EEE9',
   },
+  overrides: {
+    MuiInput: {
+      "&::placeholder": {
+        color: "#c8c6d2"
+      },
+      color: '#F1EEE9',
+      }
+    }
 });
 
 export default theme;

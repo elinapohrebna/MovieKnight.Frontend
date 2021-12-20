@@ -5,11 +5,11 @@ export const useStyles = makeStyles({
     welcomePage: {
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bgImage})`,
         height: "100vh",
-        backgroundPosition: 'center', 
-        backgroundSize: 'cover', 
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         color: "aliceblue",
-        backgroundColor: "rgba(0, 0, 0, 0.349)",
+        backgroundColor: "#2c2c5b",
         boxSizing: "border-box",
         display: "flex",
         flexDirection: "column",
@@ -31,7 +31,7 @@ export const useStyles = makeStyles({
         borderRadius: "5px",
         borderStyle: "none",
         "&:hover": {
-            backgroundColor: 'rgb(235, 226, 171)',
+            backgroundColor: '#F1EEE9',
             cursor: 'pointer',
         }
     },
@@ -40,9 +40,9 @@ export const useStyles = makeStyles({
         padding: "10px",
         borderRadius: "5px",
         borderStyle: "none",
-        backgroundColor: "rgb(237, 223, 140)",
+        backgroundColor: "#9595C4",
         "&:hover": {
-            backgroundColor: 'rgb(235, 226, 171)',
+            backgroundColor: '#6869AC',
             cursor: 'pointer',
         }
     },

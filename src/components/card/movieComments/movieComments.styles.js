@@ -6,6 +6,7 @@ export const useStyles = makeStyles({
     maxWidth: 780,
     width: "100%",
     margin: "10px auto",
+    color: '#F1EEE9',
   },
   button: {
     marginTop: 10,

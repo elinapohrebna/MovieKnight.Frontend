@@ -11,22 +11,29 @@ export const useStyles = makeStyles({
         borderRadius: 16,
         borderColor: 'green',
         borderWidth: 10,
-        backgroundColor: '#702433',
+        backgroundColor: 'rgba(56,72,114,0.5)',
         margin: 2,
         cursor: 'pointer',
         '&:hover': {
-            backgroundColor: '#6180a6',
+            backgroundColor: '#9595c4',
             opacity: 0.85,
         },
     },
     checked: {
         position: 'relative',
-        backgroundColor: '#cb8d94',
+        backgroundColor: '#9595c4',
+        color: '#825dea',
+        boxShadow: '0 0 3px #fff,\n' +
+            '    0 0 6px #fff,\n' +
+            '    0 0 9px #fff,\n' +
+            '    0 0 12px #825dea,\n' +
+            '    0 0 15px #825dea,\n' +
+            '    0 0 18px #825dea;\n',
         width: 12,
         height: 12,
         borderRadius: 12,
         '&:hover': {
-            backgroundColor: '#6180a6',
+            backgroundColor: '#29282D',
             opacity: 0.85,
         },
     },

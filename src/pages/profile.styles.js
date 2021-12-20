@@ -4,12 +4,15 @@ export const useStyles = makeStyles({
     wrapper: {
         display:'flex',
         flexDirection:'row',
-        backgroundColor: '#eeeeee'
+        backgroundColor: '#29282D'
     },
     adminBar: {
         display:'flex',
         flexDirection:'row',
-        width: '100%'
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: '80%'
     },
     friendsContainer: {
         display: 'flex',
@@ -21,10 +24,10 @@ export const useStyles = makeStyles({
         width: '15vw',
         minWidth: 180,
         padding: '2% 1%',
-        backgroundColor:'#a2505c',
+        backgroundColor:'#615C60',
         opacity: 0.85,
         '&:hover': {
-            backgroundColor: '#a2505c',
+            backgroundColor: '#7D6460',
             opacity: 1,
         },
     },
@@ -74,21 +77,24 @@ export const useStyles = makeStyles({
         left: 20,
         width: 120,
         height: 120,
-        border: "7px solid white",
-        boxShadow: '2px 2px 10px gray',
+        border: "7px solid #9595c4",
+        boxShadow: '0 0 3px #fff,\n' +
+            '    0 0 6px #fff,\n' +
+            '    0 0 10px #9595c4,\n' +
+            '    0 0 24px #9595c4;'
     },
     userInfo: {
         display: 'flex',
         flexDirection: 'column',
         marginLeft: 40,
-       
+        color: '#F1EEE9',
     },
     username: {
         fontSize: 20,
         fontWeightLight: 200,
         fontWeightRegular: 600,
         htmlFontSize: 16,
-        color: 'black',
+        color: '#9595c4',
         padding: 0,
         margin:0,
         fontFamily: "Roboto",
@@ -98,7 +104,7 @@ export const useStyles = makeStyles({
         fontWeightLight: 200,
         fontWeightRegular: 200,
         htmlFontSize: 16,
-        color: 'darkgray',
+        color: '#F1EEE9',
         padding: 0,
         margin:0,
         fontFamily: "Roboto",
@@ -117,13 +123,19 @@ export const useStyles = makeStyles({
     },
     editButton: {
         alignSelf: 'flex-start',
-        backgroundColor: '#6180a6',
+        backgroundColor: '#6869AC',
         color: '#eeeeee',
         '&:hover': {
-            backgroundColor: '#335477',
-            opacity: 0.8,
+            backgroundColor: '#3b3b6e',
+            opacity: 1,
         },
         marginLeft: 10,
+        boxShadow: '0 0 3px #fff,\n' +
+            '    0 0 6px #fff,\n' +
+            '    0 0 9px #fff,\n' +
+            '    0 0 12px #6869AC,\n' +
+            '    0 0 15px #6869AC,\n' +
+            '    0 0 18px #6869AC;\n',
     },
     blocksWrapper: {
         display: 'flex',
@@ -210,6 +222,18 @@ export const useStyles = makeStyles({
     privateCard :{
         marginTop: 100,
         marginLeft: 430,
-        padding: 20
+        padding: 20,
+        color: '#F1EEE9',
+        boxShadow: '2px 2px 5px black inset'
+    },
+    select: {
+        backgroundColor: '#9595c4',
+        color: '#F1EEE9',
+        height: '30px'
+    },
+    menuItem: {
+        backgroundColor: '#6869AC',
+        color: '#F1EEE9',
+        height: '30px'
     }
 });

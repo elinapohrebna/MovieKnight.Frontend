@@ -47,8 +47,10 @@ const FriendProfile = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const friend = JSON.parse(sessionStorage.getItem('friend'));
+    const friends = JSON.parse(sessionStorage.getItem('friends'));
     const user = JSON.parse(sessionStorage.getItem('user'));
-    console.log(friend.storyVisibility)
+    console.log(user.userInfo.username)
+  console.log(friend.username);
     return (
     <div className={classes.wrapper}>
             <div className={classes.mainContainer}>
@@ -68,7 +70,7 @@ const FriendProfile = () => {
                 </div>
                 <div>
                
-            {  (friend.storyVisibility === 1 && !friend.friends.includes(user.userInfo.username) ) || friend.storyVisibility === 0  ?  <PrivateWatch /> : <PublicWatch/>}
+            {  (friend.storyVisibility === 1 && !friends.filter((item) => item.username === friend.username) ) || friend.storyVisibility === 0  ?  <PrivateWatch /> : <PublicWatch/>}
                     
                 </div>
               

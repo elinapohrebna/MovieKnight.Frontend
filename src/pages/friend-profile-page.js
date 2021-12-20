@@ -68,7 +68,7 @@ const FriendProfile = () => {
                 </div>
                 <div>
                
-            { friend.storyVisibility === 0 && !friend.friends.includes(user.userInfo.username) ?  <PrivateWatch /> : <PublicWatch/>}
+            {  (friend.storyVisibility === 1 && !friend.friends.includes(user.userInfo.username) ) || friend.storyVisibility === 0  ?  <PrivateWatch /> : <PublicWatch/>}
                     
                 </div>
               
